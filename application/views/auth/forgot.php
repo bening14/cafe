@@ -73,12 +73,12 @@
                     <!-- /Logo -->
                     <h3 class="mb-1">Lupa Password Anda ?</h3>
                     <p class="mb-4">Masukkan akun email Anda dibawah ini. Kami akan mengirimkan email beserta tautan untuk reset password Anda</p>
-                    <form id="formAuthentication" class="mb-3" action="auth-reset-password-cover.html" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="<?= base_url('auth/cekmail') ?>" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus />
                         </div>
-                        <button class="btn btn-primary d-grid w-100">Reset Password</button>
+                        <button class="btn btn-primary d-grid w-100" type="submit">Reset Password</button>
                     </form>
                     <div class="text-center">
                         <a href="<?= base_url('auth') ?>" class="d-flex align-items-center justify-content-center">

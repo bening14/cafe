@@ -69,13 +69,13 @@
                     </div>
                     <h3 class="mb-1">Verifikasi email Anda</h3>
                     <p class="text-start mb-4">
-                        Pesan aktivasi telah dikirimkan ke email Anda : hello@example.com Tolong klik link yang terkirim untuk melanjutkan pendaftaran Anda.
+                        Pesan aktivasi telah dikirimkan ke email Anda, silahkan klik link yang terkirim untuk melanjutkan pendaftaran Anda.
                     </p>
                     <a class="btn btn-primary w-100 mb-3" href="<?= base_url('auth') ?>"> Login </a>
-                    <p class="text-center">
+                    <!-- <p class="text-center">
                         Belum mendapatkan email?
                         <a href="javascript:void(0);"> Kirim ulang </a>
-                    </p>
+                    </p> -->
                 </div>
             </div>
             <!-- / Verify email -->

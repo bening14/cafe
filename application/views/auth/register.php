@@ -72,20 +72,20 @@
                     </div>
                     <!-- /Logo -->
                     <h3 class="mb-1">Daftar Akun</h3>
-                    <p class="mb-4">Daftar sekarang Solusicafe GRATIS untuk UMKM Indonesia!</p>
+                    <p class="mb-4">Daftar sekarang Solusicafe GRATIS untuk UMKM Indonesia !</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="<?= base_url('auth/signup') ?>" method="POST">
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap" />
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email Anda" />
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Anda" />
                         </div>
                         <div class="mb-3">
-                            <label for="handphone" class="form-label">Nomor Handphone</label>
-                            <input type="text" class="form-control" id="handphone" name="handphone" placeholder="Nomor Handphone" />
+                            <label for="no_hp" class="form-label">Nomor Handphone</label>
+                            <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor Handphone" />
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
@@ -104,7 +104,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-primary d-grid w-100">Sign up</button>
+                        <button class="btn btn-primary d-grid w-100" type="submit">Sign up</button>
                     </form>
 
                     <p class="text-center">

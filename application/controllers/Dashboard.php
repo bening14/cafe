@@ -6,9 +6,9 @@ class Dashboard extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('idkamu')) {
+        if (!$this->session->userdata('email')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Please Login!</div>');
+            Silahkan login terlebih dahulu!</div>');
             redirect('auth');
         }
         $this->load->model("Crud", "crud");

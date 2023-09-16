@@ -75,9 +75,9 @@
                     <form action="<?= base_url('auth') ?>" method="POST">
                         <?= $this->session->flashdata('message') ?>
                         <div class="mb-3">
-                            <label for="idkamu" class="form-label">Email atau Username</label>
-                            <input type="text" class="form-control" id="idkamu" name="idkamu" placeholder="Enter your email or username" value="<?= set_value('idkamu') ?>" />
-                            <?= form_error('idkamu', '<small class="text-danger">', '</small>') ?>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email Anda" value="<?= set_value('email') ?>" />
+                            <?= form_error('email', '<small class="text-danger">', '</small>') ?>
                         </div>
                         <div class=" mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">

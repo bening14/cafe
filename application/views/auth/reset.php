@@ -72,23 +72,27 @@
                     </div>
                     <!-- /Logo -->
                     <h4 class="mb-1">Reset Password</h4>
-                    <p class="mb-4">Untuk Email <span class="fw-medium">john.doe@email.com</span></p>
-                    <form id="formAuthentication" class="mb-3" action="auth-login-cover.html" method="POST">
+                    <p class="mb-4">Silahkan masukkan password baru Anda</p>
+                    <form id="formAuthentication" class="mb-3" action="<?= base_url('auth/action_change') ?>" method="POST">
+                        <?= $this->session->flashdata('message') ?>
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="password">Password Baru</label>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                                <input type="hidden" class="form-control" name="email" value="<?= $email ?>">
+                                <input type="password" id="password" class="form-control" name="password1" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
+                            <?= form_error('password', '<small class="text-danger">', '</small>') ?>
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <label class="form-label" for="confirm-password">Konfirmasi Password</label>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="confirm-password" class="form-control" name="confirm-password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                                <input type="password" id="confirm-password" class="form-control" name="password2" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
+                            <?= form_error('password', '<small class="text-danger">', '</small>') ?>
                         </div>
-                        <button class="btn btn-primary d-grid w-100 mb-3">Set password baru</button>
+                        <button class="btn btn-primary d-grid w-100 mb-3" type="submit">Set password baru</button>
                         <div class="text-center">
                             <a href="auth-login-cover.html">
                                 <i class="ti ti-chevron-left scaleX-n1-rtl"></i>
