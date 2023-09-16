@@ -381,7 +381,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="<?= base_url('auth/logout') ?>" target="_blank">
+                        <a class="dropdown-item" href="<?= base_url('auth/logout') ?>">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Log Out</span>
                         </a>

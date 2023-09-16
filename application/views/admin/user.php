@@ -55,7 +55,21 @@
         <div class="layout-container">
             <!-- Menu -->
 
-            <?php include('./application/views/template/menu.php') ?>
+            <?php
+            if ($this->session->userdata('level') == 'superuser') {
+                include('./application/views/template/menu.php');
+            } else if ($this->session->userdata('level') == 'admin') {
+                include('./application/views/template/menu_admin.php');
+            } else if ($this->session->userdata('level') == 'manajer') {
+                include('./application/views/template/menu_manajer.php');
+            } else if ($this->session->userdata('level') == 'kasir') {
+                include('./application/views/template/menu_kasir.php');
+            } else if ($this->session->userdata('level') == 'waitress') {
+                include('./application/views/template/menu_waitress.php');
+            } else if ($this->session->userdata('level') == 'kitchen') {
+                include('./application/views/template/menu_kitchen.php');
+            }
+            ?>
             <!-- / Menu -->
 
             <!-- Layout container -->
