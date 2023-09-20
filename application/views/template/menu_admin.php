@@ -173,19 +173,19 @@
                 </li>
                 <li class="menu-item">
                     <a href="<?= base_url('customer/struk') ?>" class="menu-link">
-                        <div data-i18n="Desan Struk">Desan Struk</div>
+                        <div data-i18n="Struk & QR">Struk & QR</div>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('customer/pelanggan') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Pelanggan">Pelanggan</div>
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('customer/promo') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-discount-2"></i>
                 <div data-i18n="Promo">Promo</div>
             </a>

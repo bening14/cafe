@@ -72,7 +72,7 @@ class Auth extends CI_Controller
                         'no_hp' => $user['no_hp'],
                         'level' => $user['level'],
                         'id' => $user['id'],
-                        'id_mst_brand' => $user['id_mst_brand'],
+                        'id_mst_bisnis' => $user['id_mst_bisnis'],
                         'id_mst_store' => $user['id_mst_store']
                     );
                     //buat session

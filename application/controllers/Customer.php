@@ -81,9 +81,9 @@ class Customer extends CI_Controller
             'id_mst_user =' => $this->session->userdata('id')
         );
         $table = 'mst_bisnis'; //nama tabel dari database
-        $column_order = array('id', 'kode_bisnis', 'nama_bisnis', 'logo', 'kota_bisnis', 'telephone', 'pajak', 'ppn', 'outlet', 'id_mst_user', 'date_created'); //field yang ada di table user
-        $column_search = array('id', 'kode_bisnis', 'nama_bisnis', 'logo', 'kota_bisnis', 'telephone', 'pajak', 'ppn', 'outlet', 'id_mst_user', 'date_created'); //field yang diizin untuk pencarian 
-        $select = 'id, kode_bisnis, nama_bisnis, logo, kota_bisnis, telephone, pajak, ppn, outlet, id_mst_user, date_created';
+        $column_order = array('id', 'kode_bisnis', 'nama_bisnis', 'logo', 'kota_bisnis', 'telephone', 'outlet', 'id_mst_user', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'kode_bisnis', 'nama_bisnis', 'logo', 'kota_bisnis', 'telephone', 'outlet', 'id_mst_user', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, kode_bisnis, nama_bisnis, logo, kota_bisnis, telephone, outlet, id_mst_user, date_created';
         $order = array('id' => 'asc'); // default order 
         $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
         $data = array();
@@ -98,8 +98,6 @@ class Customer extends CI_Controller
             $row['data']['logo'] = $key->logo;
             $row['data']['kota_bisnis'] = $key->kota_bisnis;
             $row['data']['telephone'] = $key->telephone;
-            $row['data']['pajak'] = $key->pajak;
-            $row['data']['ppn'] = $key->ppn;
             $row['data']['outlet'] = $key->outlet;
             $row['data']['id_mst_user'] = $key->id_mst_user;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
@@ -338,6 +336,138 @@ class Customer extends CI_Controller
         echo json_encode($response);
     }
 
+    public function pelanggan()
+    {
+        $this->load->view('customer/pelanggan');
+    }
+
+    public function ajax_table_pelanggan()
+    {
+
+        $table = 'tbl_pelanggan'; //nama tabel dari database
+        $column_order = array('id', 'nama', 'telephone', 'kode_pelanggan', 'email', 'alamat', 'catatan', 'jenis_kelamin', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama', 'telephone', 'kode_pelanggan', 'email', 'alamat', 'catatan', 'jenis_kelamin', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama, telephone, kode_pelanggan, email, alamat, catatan, jenis_kelamin, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['nama'] = $key->nama;
+            $row['data']['telephone'] = $key->telephone;
+            $row['data']['kode_pelanggan'] = $key->kode_pelanggan;
+            $row['data']['email'] = $key->email;
+            $row['data']['alamat'] = $key->alamat;
+            $row['data']['catatan'] = $key->catatan;
+            $row['data']['jenis_kelamin'] = $key->jenis_kelamin;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function insert_data_pelanggan()
+    {
+        $table = $this->input->post("table");
+
+        $data = $this->input->post();
+        unset($data['table']);
+
+        if ($data['kategori'] == 'tambah') {
+            //buat kode pelanggan
+            $d = $this->crud->get_all_limit($table)->row_array();
+            if ($d) {
+                $r = explode('-', $d['kode_pelanggan']);
+                $seq = $r[1] + 1;
+                $data['kode_pelanggan'] = 'CUST-' . $seq;
+            } else {
+                $data['kode_pelanggan'] = 'CUST-1000';
+            }
+
+            unset($data['kategori']);
+
+
+            $insert_data = $this->crud->insert($table, $data);
+        } else {
+            $where = array(
+                'id' => $data['id']
+            );
+
+            unset($data['id']);
+            unset($data['kategori']);
+
+            $insert_data = $this->crud->update($table, $data, $where);
+        }
+
+
+        if ($insert_data > 0) {
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function promo()
+    {
+        $this->load->view('customer/promo');
+    }
+
+    public function promo_khusus()
+    {
+        $this->load->view('customer/promo_khusus');
+    }
+
+    public function ajax_table_promo_khusus()
+    {
+
+        $table = 'tbl_promo_khusus'; //nama tabel dari database
+        $column_order = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama_promo, jenis, nilai_promo, status, id_mst_outlet, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['nama_promo'] = $key->nama_promo;
+            $row['data']['jenis'] = $key->jenis;
+            $row['data']['nilai_promo'] = $key->nilai_promo;
+            $row['data']['status'] = $key->status;
+            $row['data']['id_mst_outlet'] = $key->id_mst_outlet;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
     public function manajer()
     {
         $this->load->view('customer/manajer');

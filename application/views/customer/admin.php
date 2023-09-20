@@ -368,7 +368,7 @@
 </html>
 
 <script>
-    var brand = '<?= $this->session->userdata('id_mst_brand') ?>'
+    var brand = '<?= $this->session->userdata('id_mst_bisnis') ?>'
     <?php $target = 0; ?>
     $(function() {
         // alert('OK')
