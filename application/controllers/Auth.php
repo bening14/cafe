@@ -20,7 +20,7 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('idkamu') != '') {
+        if ($this->session->userdata('email') != '') {
 
             if ($this->session->userdata('level') == 'superuser') {
                 redirect('dashboard');
@@ -396,7 +396,8 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('idkamu');
+        $this->session->unset_userdata('nama');
+        $this->session->unset_userdata('no_hp');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('level');
         $this->session->unset_userdata('id');

@@ -281,9 +281,6 @@
                     </div>
                     <!-- / Content -->
 
-
-
-
                     <!-- Footer -->
                     <?php include('./application/views/template/footer.php') ?>
                     <!-- / Footer -->
@@ -302,6 +299,39 @@
         <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
+
+    <!-- Enable OTP Modal -->
+    <div class="modal fade" id="modalBrand" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <img src="<?= base_url('assets/template-admin/') ?>assets/img/\illustrations/wizard-create-deal-confirm.png" alt="picture-hello">
+                        <h3 class="mb-2">Halo <?= $this->session->userdata('nama') ?>, Selamat datang di Solusicafe, Aplikasi Manajemen Cafe atau Resto Gratis untuk #UMKM Indonesia</h3>
+
+                    </div>
+                    <p class="text-center mb-3">Sebelum memulai, kamu harus mendaftarkan Brand atau Bisnis kamu terlebih dahulu.</p>
+                    <div class="d-grid gap-2">
+                        <a href="<?= base_url('customer/bisnis') ?>" class="btn btn-primary" type="button">Daftarkan Brand atau Bisnis Saya</a>
+                    </div>
+                    <!-- <form id="addProductForm" class="row g-3" onsubmit="return false">
+                        <div class="col-12">
+                            <label class="form-label" for="modaladdProduct">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">US (+1)</span>
+                                <input type="text" id="modaladdProduct" name="modaladdProduct" class="form-control phone-number-otp-mask" placeholder="202 555 0111" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Daftarkan Branda atau Bisnis Saya</button>
+                        </div>
+                    </form> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Enable OTP Modal -->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -338,8 +368,14 @@
 </html>
 
 <script>
+    var brand = '<?= $this->session->userdata('id_mst_brand') ?>'
     <?php $target = 0; ?>
     $(function() {
+        // alert('OK')
+        if (brand == '0') {
+            $('#modalBrand').modal('show')
+        }
+
         $("#table-user").DataTable({
             "responsive": true,
             "lengthChange": true,

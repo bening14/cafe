@@ -158,21 +158,21 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-building-store"></i>
-                <div data-i18n="Outlet"></div>
+                <div data-i18n="Bisnis"></div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('customer/bisnis') ?>" class="menu-link">
                         <div data-i18n="Outlet">Outlet</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
-                        <div data-i18n="Pajak">Pajak</div>
+                    <a href="<?= base_url('customer/pajak') ?>" class="menu-link">
+                        <div data-i18n="Pajak & Layanan">Pajak & Layanan</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('customer/struk') ?>" class="menu-link">
                         <div data-i18n="Desan Struk">Desan Struk</div>
                     </a>
                 </li>
