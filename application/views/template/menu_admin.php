@@ -69,12 +69,12 @@
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="<?= base_url('produk/kategori') ?>" class="menu-link">
                         <div data-i18n="Kategori">Kategori</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
+                    <a href="<?= base_url('produk') ?>" class="menu-link">
                         <div data-i18n="Menu">Menu</div>
                     </a>
                 </li>
