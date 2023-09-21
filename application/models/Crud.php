@@ -8,6 +8,14 @@ class Crud extends CI_Model
         return $this->db->get_where($table, $where);
     }
 
+    public function get_where_group($table, $where, $group)
+    {
+        $this->db->order_by("id", "DESC");
+        $this->db->group_by($group); // Produces: GROUP BY title
+        $this->db->where($where);
+        return $this->db->get($table);
+    }
+
     public function get_where_select($table, $select, $where)
     {
         $this->db->select($select);

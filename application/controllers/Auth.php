@@ -401,7 +401,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('level');
         $this->session->unset_userdata('id');
-        $this->session->unset_userdata('id_mst_brand');
+        $this->session->unset_userdata('id_mst_bisnis');
         $this->session->unset_userdata('id_mst_store');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">

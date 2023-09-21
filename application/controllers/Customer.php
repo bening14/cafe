@@ -118,8 +118,6 @@ class Customer extends CI_Controller
 
     public function ajax_table_outlet()
     {
-        // echo $this->input->post('id_mst_bisnis');
-        // die;
         $where = array(
             'id_mst_bisnis =' => $this->input->post('id_mst_bisnis')
         );
@@ -224,6 +222,7 @@ class Customer extends CI_Controller
 
 
             $insert_data = $this->crud->insert($table, $data);
+            $this->crud->update('mst_user', ['id_mst_bisnis' => '1'], ['id' => $this->session->userdata('id')]);
         } else {
             $where = array(
                 'id' => $data['id']
@@ -429,16 +428,20 @@ class Customer extends CI_Controller
 
     public function promo_khusus()
     {
-        $this->load->view('customer/promo_khusus');
+        $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+
+        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $r['id']])->result_array();
+
+        $this->load->view('customer/promo_khusus', $data);
     }
 
     public function ajax_table_promo_khusus()
     {
 
         $table = 'tbl_promo_khusus'; //nama tabel dari database
-        $column_order = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'date_created'); //field yang ada di table user
-        $column_search = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'date_created'); //field yang diizin untuk pencarian 
-        $select = 'id, nama_promo, jenis, nilai_promo, status, id_mst_outlet, date_created';
+        $column_order = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'nama_outlet', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'nama_promo', 'jenis', 'nilai_promo', 'status', 'id_mst_outlet', 'nama_outlet', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, nama_promo, jenis, nilai_promo, status, id_mst_outlet, nama_outlet, date_created';
         $order = array('id' => 'asc'); // default order 
         $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order);
         $data = array();
@@ -453,6 +456,7 @@ class Customer extends CI_Controller
             $row['data']['nilai_promo'] = $key->nilai_promo;
             $row['data']['status'] = $key->status;
             $row['data']['id_mst_outlet'] = $key->id_mst_outlet;
+            $row['data']['nama_outlet'] = $key->nama_outlet;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
 
             $data[] = $row;
@@ -468,6 +472,66 @@ class Customer extends CI_Controller
         //output to json format
         echo json_encode($output);
     }
+
+    public function addpromokhusus()
+    {
+        $nama_promo = $_POST['nama'];
+        $jenis = $_POST['jenis'];
+        $nilai_promo = $_POST['nilai_promo'];
+        $count = $_POST['jumlah_outlet'];
+
+        //GENERATE KODE PROMO
+        $d = $this->crud->get_all_limit('tbl_promo_khusus')->row_array();
+        if ($d) {
+            $r = explode('-', $d['kode_promo']);
+            $seq = $r[1] + 1;
+            $kode_promo = 'PROMO-' . $seq;
+        } else {
+            $kode_promo = 'PROMO-1000';
+        }
+
+        //cek apakah semua outlet ?
+        if (isset($_POST['semua'])) {
+            $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+            $alloutlet = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $r['id']])->result_array();
+
+            foreach ($alloutlet as $row => $val) {
+
+                $data2 = array(
+                    'kode_promo' => $kode_promo,
+                    'nama_promo' => $nama_promo,
+                    'jenis' => $jenis,
+                    'nilai_promo' => $nilai_promo,
+                    'id_mst_outlet' => $val['id'],
+                    'nama_outlet' => $val['nama_outlet'],
+                    'status' => 'Active'
+                );
+                $this->crud->insert('tbl_promo_khusus', $data2);
+            }
+        } else {
+            for ($i = 1; $i <= $count; $i++) {
+                $outlet = $_POST['outlet-' . $i];
+                if (!empty($outlet)) {
+                    $a = explode('-', $outlet);
+
+                    $data = array(
+                        'kode_promo' => $kode_promo,
+                        'nama_promo' => $nama_promo,
+                        'jenis' => $jenis,
+                        'nilai_promo' => $nilai_promo,
+                        'id_mst_outlet' => $a[0],
+                        'nama_outlet' => $a[1],
+                        'status' => 'Active',
+                    );
+                    $this->crud->insert('tbl_promo_khusus', $data);
+                }
+            }
+        }
+
+
+        redirect('customer/promo_khusus');
+    }
+
     public function manajer()
     {
         $this->load->view('customer/manajer');

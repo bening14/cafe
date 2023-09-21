@@ -443,17 +443,17 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'berhasil tambah data',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'berhasil tambah data',
+                    //     showConfirmButton: false,
+                    //     timer: 1500,
+                    //     customClass: {
+                    //         confirmButton: 'btn btn-primary'
+                    //     },
+                    //     buttonsStyling: false
+                    // })
                     $('#nama_bisnis').val('')
                     $('#kota_bisnis').val('')
                     $('#telephone').val('')
@@ -533,17 +533,17 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'berhasil ubah data',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'berhasil ubah data',
+                    //     showConfirmButton: false,
+                    //     timer: 1500,
+                    //     customClass: {
+                    //         confirmButton: 'btn btn-primary'
+                    //     },
+                    //     buttonsStyling: false
+                    // })
                     $('#editbisnis').modal('hide');
                     reload_table()
 
@@ -615,17 +615,17 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'berhasil tambah data',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: 'berhasil tambah data',
+                    //     showConfirmButton: false,
+                    //     timer: 1500,
+                    //     customClass: {
+                    //         confirmButton: 'btn btn-primary'
+                    //     },
+                    //     buttonsStyling: false
+                    // })
                     $('#nama_outlet').val('')
                     $('#lokasi').val('')
                     $('#phone').val('')
@@ -686,14 +686,14 @@
                         dataType: 'json',
                         success: function(result) {
                             if (result.status == "success") {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Terhapus!',
-                                    text: 'Data berhasil dihapus',
-                                    customClass: {
-                                        confirmButton: 'btn btn-success'
-                                    }
-                                });
+                                // Swal.fire({
+                                //     icon: 'success',
+                                //     title: 'Terhapus!',
+                                //     text: 'Data berhasil dihapus',
+                                //     customClass: {
+                                //         confirmButton: 'btn btn-success'
+                                //     }
+                                // });
                                 reload_table()
                             } else
                                 Swal.fire({

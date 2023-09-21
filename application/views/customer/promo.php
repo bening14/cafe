@@ -91,65 +91,73 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Users List Table -->
                         <div class="col-md-12 col-xl-12 col-xl-12 mb-4">
-                            <div class="card h-100">
-                                <div class="card-header d-flex justify-content-between pb-2 mb-1">
-                                    <div class="card-title mb-1">
-                                        <h5 class="m-0 me-2">Promo</h5>
-                                        <small class="text-muted">Fitur Promo untuk diberikan kepada pelanggan Anda</small>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="nav-align-top">
-                                        <ul class="nav nav-tabs nav-fill" role="tablist">
-                                            <li class="nav-item">
-                                                <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-promokhusus" aria-controls="navs-justified-promokhusus" aria-selected="true">
-                                                    Promo Khusus
-                                                </button>
-                                            </li>
-                                            <li class="nav-item">
-                                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-link-promootomatis" aria-controls="navs-justified-link-promootomatis" aria-selected="false">
-                                                    Promo Otomatis
-                                                </button>
-                                            </li>
-                                            <li class="nav-item">
-                                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-link-voucher" aria-controls="navs-justified-link-voucher" aria-selected="false">
-                                                    Voucher
-                                                </button>
-                                            </li>
-                                            <li class="nav-item">
-                                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-justified-link-poin" aria-controls="navs-justified-link-poin" aria-selected="false">
-                                                    Poin
-                                                </button>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content pb-0">
-                                            <div class="tab-pane fade show active" id="navs-justified-promokhusus" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-6 col-xl-6">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h5 class="m-0 me-2">Promo Khusus</h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
                                                 <p>Merupakan promo yang dapat dipilih oleh kasir yang memiliki hak akses "Memberi Diskon"</p>
                                                 <p><strong>Contoh :</strong> Diskon 10% untuk pelajar.</p>
-                                                <a href="<?= base_url('customer/promo_khusus') ?>" type="button" class="btn btn-twitter waves-effect waves-light mt-5"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></a>
+                                                <a href="<?= base_url('customer/promo_khusus') ?>" type="button" class="btn btn-twitter waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></a>
                                             </div>
-
-                                            <div class="tab-pane fade" id="navs-justified-link-promootomatis" role="tabpanel">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-6">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h5 class="m-0 me-2">Promo Otomatis</h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
                                                 <p>Merupakan promo yang akan otomatis diimplementasikan ketika konsumen mencapai kriteria tertentu</p>
                                                 <p><strong>Contoh :</strong> Jika konsumen membeli A maka otomatis akan gratis B.</p>
-                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-5"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
+                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
                                             </div>
-
-                                            <div class="tab-pane fade" id="navs-justified-link-voucher" role="tabpanel">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-6 mt-3">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h5 class="m-0 me-2">Voucher</h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
                                                 <p> Merupakan promo dalam bentuk kode voucher yang dapat dibagikan ke pelanggan untuk mendapatkan potongan pembelian</p>
-                                                <p><strong>Contoh :</strong> DISKONKEMERDEKAAN mendapatkan diskon Rp10,000</p>
-                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-5"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Voucher : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
-                                            </div>
-
-                                            <div class="tab-pane fade" id="navs-justified-link-poin" role="tabpanel">
-                                                <p>Merupakan sistem loyalty berupa pemberian untuk "Member" pada setiap transaksi dan dapat ditukar dengan potongan pembelian ketika member telah mempunyai poin yang cukup</p>
-                                                <p><strong>Contoh :</strong> 100 point = diskon Rp.10,000</p>
+                                                <p><strong>Contoh :</strong> DISKONKEMERDEKAAN = diskon Rp10,000</p>
                                                 <button type="button" class="btn btn-twitter waves-effect waves-light mt-5"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Voucher : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-xl-6 mt-3">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h5 class="m-0 me-2">Poin</h5>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <p>Merupakan sistem loyalty berupa pemberian untuk "Member" pada setiap transaksi dan dapat ditukar dengan potongan pembelian ketika member telah mempunyai poin yang cukup</p>
+                                                <p><strong>Contoh :</strong> 100 point = diskon Rp.10,000</p>
+                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-4"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Poin : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- / Content -->
