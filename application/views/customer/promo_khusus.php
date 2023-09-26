@@ -98,7 +98,7 @@
                                     </div>
                                     <div>
                                         <a href="<?= base_url('customer/promo') ?>" class="btn btn-sm btn-primary"><i class="ti ti-arrow-narrow-left"></i> Kembali</a>
-                                        <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-discount-2"></i> Tambah</button>
+                                        <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-discount-2"></i> Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +156,7 @@
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="nama">Nama Promo</label>
                             <input type="text" id="nama" name="nama" class="form-control" placeholder="Misal : Diskon Kemerdekaan" required />
+                            <input type="hidden" id="id_mst_bisnis" name="id_mst_bisnis" class="form-control" value="<?= $id_mst_bisnis ?>" />
                         </div>
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="jenis">Jenis</label>
@@ -275,10 +276,15 @@
                     "className": 'text-center py-1',
                     "data": "data",
                     "render": function(data) {
-                        if (data.status == 'Active') {
-                            return `<span class="badge rounded-pill bg-label-success">Active</span>`
+                        // if (data.status == 'Active') {
+                        //     return `<span class="badge rounded-pill bg-label-success">Active</span>`
+                        // } else {
+                        //     return `<span class="badge rounded-pill bg-label-danger">Not Active</span>`
+                        // }
+                        if (data.status == 'Aktif') {
+                            return `<button type="button" class="btn rounded-pill btn-label-success btn-sm waves-effect">Aktif</button>`
                         } else {
-                            return `<span class="badge rounded-pill bg-label-danger">Not Active</span>`
+                            return `<button type="button" class="btn rounded-pill btn-label-danger btn-sm waves-effect">Tidak Aktif</button>`
                         }
                     }
                 }, {
@@ -291,11 +297,17 @@
                     "className": 'py-1',
                     "data": "data",
                     "render": function(data) {
-                        return `<div class="d-flex align-items-center">
-                                    
-                                    <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
-                                    
-                                </div>`
+                        if (data.status == 'Aktif') {
+                            return `<div class="d-flex align-items-center">
+                                        <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
+                                        <button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="change('` + data.id + `', 'Tidak Aktif')">Non Aktifkan</button>
+                                    </div>`
+                        } else {
+                            return `<div class="d-flex align-items-center">
+                                        <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
+                                        <button type="button" class="btn btn-success btn-sm waves-effect waves-light" onclick="change('` + data.id + `', 'Aktif')">Aktifkan</button>
+                                    </div>`
+                        }
                     }
                 }
             ],
@@ -365,5 +377,31 @@
                 }
             }
         });
+    }
+
+    function change(id, data) {
+        $.ajax({
+            url: '<?= base_url() ?>customer/ubah_aktif',
+            data: {
+                id: id,
+                data: data
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                if (result.status == "success") {
+                    reload_table()
+                } else
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Telah terjadi kesalahan, silahkan contact CS',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+            }
+        })
     }
 </script>

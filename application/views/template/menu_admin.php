@@ -94,7 +94,7 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('inventory') ?>" class="menu-link">
                         <div data-i18n="Kartu Stok">Kartu Stok</div>
                     </a>
                 </li>
@@ -190,14 +190,14 @@
                 <div data-i18n="Promo">Promo</div>
             </a>
         </li>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-moneybag"></i>
                 <div data-i18n="Komisi">Komisi</div>
             </a>
-        </li>
+        </li> -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('customer/status_meja') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-soup"></i>
                 <div data-i18n="Status Meja">Status Meja</div>
             </a>

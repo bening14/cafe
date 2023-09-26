@@ -98,7 +98,7 @@
                                     </div>
                                     <div>
 
-                                        <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-discount-2"></i> Tambah</button>
+                                        <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-category-2"></i> Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,6 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nama Kategori</th>
-                                            <th>Jumlah Produk</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -140,7 +139,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <!-- Tambah Pelanggan Modal -->
+    <!-- Tambah kategori Modal -->
     <div class="modal fade" id="tambahkategori" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
@@ -149,12 +148,11 @@
                     <div class="text-center mb-4">
                         <h3 class="mb-2">Tambah Kategori</h3>
                     </div>
-                    <form id="form-data" class="row g-3">
+                    <form id="form-data" method="post" class="row g-3">
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="nama_kategori">Nama Kategori</label>
-                            <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" placeholder="Misal : Makanan" />
+                            <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" placeholder="Misal : Makanan" required />
                         </div>
-
 
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
@@ -167,7 +165,8 @@
             </div>
         </div>
     </div>
-    <!--/ Tambah Pelanggan Modal -->
+    <!--/ Tambah kategori Modal -->
+
 
     <!-- edit pelanggan Modal -->
     <div class="modal fade" id="editkategori" tabindex="-1" aria-hidden="true">
@@ -198,6 +197,7 @@
         </div>
     </div>
     <!--/ edit pelanggan Modal -->
+
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -249,7 +249,10 @@
             'ajax': {
                 'dataType': 'json',
                 'url': '<?= base_url() ?>produk/ajax_table_kategori',
-                'type': 'post'
+                'type': 'post',
+                'data': {
+                    id_mst_bisnis: '<?= $id_mst_bisnis ?>'
+                }
             },
             'columns': [{
                     "target": [<?= $target ?>],
@@ -259,10 +262,6 @@
                     "target": [<?= $target ?>],
                     "className": 'text-left py-1',
                     "data": "data.nama_kategori",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.jumlah_produk",
                 },
                 {
                     "target": [<?= $target ?>],
@@ -286,69 +285,6 @@
     function reload_table() {
         $('#table-kategori').DataTable().ajax.reload(null, false);
     }
-
-    $("#form-data").submit(function(e) {
-        e.preventDefault()
-
-        if ($('#nama_kategori').val() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Tidak boleh ada kolom kosong!',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false
-            })
-            return
-        }
-
-        var form_data = new FormData();
-        form_data.append('table', 'mst_kategori');
-        form_data.append('nama_kategori', $("#nama_kategori").val());
-        form_data.append('kategori', 'tambah');
-
-        var url_ajax = '<?= base_url() ?>produk/insert_data_kategori'
-
-        $.ajax({
-            url: url_ajax,
-            type: "post",
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            dataType: "json",
-            success: function(result) {
-                if (result.status == "success") {
-                    $('#nama_kategori').val('')
-                    $('#tambahkategori').modal('hide');
-                    reload_table()
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Gagal tambah data',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                }
-            },
-            error: function(err) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Telah terjadi kesalahan, silahkan contact CS',
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                })
-            }
-        })
-    })
 
 
     function tambaho() {
@@ -407,6 +343,78 @@
         $('#nama_kategori_e').val(nama)
     }
 
+    $("#form-data").submit(function(e) {
+        e.preventDefault()
+
+        if ($('#nama_kategori').val() == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tidak boleh ada kolom kosong!',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+            return
+        }
+
+        var form_data = new FormData();
+        form_data.append('table', 'mst_kategori');
+        form_data.append('nama_kategori', $("#nama_kategori").val());
+        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
+
+        var url_ajax = '<?= base_url() ?>produk/insert_data_kategori'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    $('#tambahkategori').modal('hide');
+                    reload_table()
+
+                } else if (result.status == "double") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Kategori yang Anda tambahkan sudah tersedia',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal ubah data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
+
     $("#form-data-edit").submit(function(e) {
         e.preventDefault()
 
@@ -427,9 +435,8 @@
         form_data.append('table', 'mst_kategori');
         form_data.append('id', $("#id_e").val());
         form_data.append('nama_kategori', $("#nama_kategori_e").val());
-        form_data.append('kategori', 'edit');
 
-        var url_ajax = '<?= base_url() ?>produk/insert_data_kategori'
+        var url_ajax = '<?= base_url() ?>produk/update_data_kategori'
 
         $.ajax({
             url: url_ajax,

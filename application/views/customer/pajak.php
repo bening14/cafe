@@ -136,7 +136,7 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho('<?= $id_mst_bisnis ?>')"><i class="ti ti-receipt-tax"></i> Tambah Pajak & Layanan</button>
+                                <button class="btn btn-sm btn-info" onclick="tambaho('<?= $id_mst_bisnis ?>')"><i class="ti ti-receipt-tax"></i> Tambah Pajak & Layanan</button>
                             </div>
                             <div class="card-datatable table-responsive">
                                 <table id="table-pajak" class="table">
@@ -147,6 +147,7 @@
                                             <th>Jenis</th>
                                             <th>Satuan</th>
                                             <th>Jumlah</th>
+                                            <th>Sifat Pembayaran</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -211,6 +212,13 @@
                             <label class="form-label" for="jumlah">Jumlah</label>
                             <input type="text" id="jumlah" name="jumlah" class="form-control" placeholder="Contoh : Jika Persentase isikan 11 atau jika Rupiah isikan 1000" />
                         </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="sifat">Sifat Pembayaran</label>
+                            <select name="sifat" id="sifat" class="form-control">
+                                <option value="Mandatory">Mandatory</option>
+                                <option value="Optional">Optional</option>
+                            </select>
+                        </div>
 
 
                         <div class="col-12 text-center">
@@ -258,6 +266,13 @@
                         <div class="col-12 col-md-12">
                             <label class="form-label" for="jumlah_e">Jumlah</label>
                             <input type="text" id="jumlah_e" name="jumlah_e" class="form-control" placeholder="Contoh : Jika Persentase isikan 11 atau jika Rupiah isikan 1000" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="sifat_e">Sifat Pembayaran</label>
+                            <select name="sifat_e" id="sifat_e" class="form-control">
+                                <option value="Mandatory">Mandatory</option>
+                                <option value="Optional">Optional</option>
+                            </select>
                         </div>
 
 
@@ -349,6 +364,17 @@
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
                     "data": "data.jumlah",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        if (data.sifat == 'Mandatory') {
+                            return `<span class="badge rounded-pill bg-label-danger">Mandatory</span>`
+                        } else {
+                            return `<span class="badge rounded-pill bg-label-primary">Optional</span>`
+                        }
+                    }
                 },
                 {
                     "target": [<?= $target ?>],
@@ -396,6 +422,7 @@
         form_data.append('id_mst_bisnis', $("#id_mst_bisnis").val());
         form_data.append('satuan', $("#satuan").val());
         form_data.append('jumlah', $("#jumlah").val());
+        form_data.append('sifat', $("#sifat").val());
         form_data.append('kategori', 'tambah');
 
         var url_ajax = '<?= base_url() ?>customer/insert_data_pajak'
@@ -546,6 +573,7 @@
         form_data.append('jenis', $("#jenis_e").val());
         form_data.append('satuan', $("#satuan_e").val());
         form_data.append('jumlah', $("#jumlah_e").val());
+        form_data.append('sifat', $("#sifat_e").val());
         form_data.append('kategori', 'edit');
 
         var url_ajax = '<?= base_url() ?>customer/insert_data_pajak'

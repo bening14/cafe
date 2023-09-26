@@ -103,7 +103,7 @@
                                             <div>
                                                 <p>Merupakan promo yang dapat dipilih oleh kasir yang memiliki hak akses "Memberi Diskon"</p>
                                                 <p><strong>Contoh :</strong> Diskon 10% untuk pelajar.</p>
-                                                <a href="<?= base_url('customer/promo_khusus') ?>" type="button" class="btn btn-twitter waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></a>
+                                                <a href="<?= base_url('customer/promo_khusus') ?>" type="button" class="btn btn-twitter waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;"><?= $promo ?></strong></a>
                                             </div>
                                         </div>
                                     </div>
@@ -114,12 +114,13 @@
                                             <div class="card-title mb-1">
                                                 <h5 class="m-0 me-2">Promo Otomatis</h5>
                                             </div>
+                                            <span class="badge rounded-pill bg-label-success"><i class="ti ti-grill"></i> Belum Tersedia</span>
                                         </div>
                                         <div class="card-body">
                                             <div>
                                                 <p>Merupakan promo yang akan otomatis diimplementasikan ketika konsumen mencapai kriteria tertentu</p>
                                                 <p><strong>Contoh :</strong> Jika konsumen membeli A maka otomatis akan gratis B.</p>
-                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
+                                                <button type="button" class="btn btn-label-secondary waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Promo : &nbsp;&nbsp;<strong style="font-size: 18px;">0</strong></button>
                                             </div>
                                         </div>
                                     </div>
@@ -130,12 +131,13 @@
                                             <div class="card-title mb-1">
                                                 <h5 class="m-0 me-2">Voucher</h5>
                                             </div>
+                                            <span class="badge rounded-pill bg-label-success"><i class="ti ti-grill"></i> Belum Tersedia</span>
                                         </div>
                                         <div class="card-body">
                                             <div>
                                                 <p> Merupakan promo dalam bentuk kode voucher yang dapat dibagikan ke pelanggan untuk mendapatkan potongan pembelian</p>
                                                 <p><strong>Contoh :</strong> DISKONKEMERDEKAAN = diskon Rp10,000</p>
-                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-5"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Voucher : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
+                                                <button type="button" class="btn btn-label-secondary waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Voucher : &nbsp;&nbsp;<strong style="font-size: 18px;">0</strong></button>
                                             </div>
                                         </div>
                                     </div>
@@ -146,12 +148,13 @@
                                             <div class="card-title mb-1">
                                                 <h5 class="m-0 me-2">Poin</h5>
                                             </div>
+                                            <span class="badge rounded-pill bg-label-success"><i class="ti ti-grill"></i> Belum Tersedia</span>
                                         </div>
                                         <div class="card-body">
                                             <div>
                                                 <p>Merupakan sistem loyalty berupa pemberian untuk "Member" pada setiap transaksi dan dapat ditukar dengan potongan pembelian ketika member telah mempunyai poin yang cukup</p>
                                                 <p><strong>Contoh :</strong> 100 point = diskon Rp.10,000</p>
-                                                <button type="button" class="btn btn-twitter waves-effect waves-light mt-4"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Poin : &nbsp;&nbsp;<strong style="font-size: 18px;">1</strong></button>
+                                                <button type="button" class="btn btn-label-secondary waves-effect waves-light mt-3"><i class="tf-icons ti ti-discount-2 ti-xs me-1"></i> Jumlah Poin : &nbsp;&nbsp;<strong style="font-size: 18px;">0</strong></button>
                                             </div>
                                         </div>
                                     </div>

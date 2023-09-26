@@ -89,32 +89,107 @@
 
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <!-- Users List Table -->
-                        <div class="card">
-                            <div class="card-header border-bottom" style="text-align: right;">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h5>Produk</h5>
-                                    </div>
-                                    <div>
-
-                                        <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-salad"></i> Tambah</button>
+                        <div class="col-md-12 col-xl-12 col-xl-12 mb-4">
+                            <div class="row">
+                                <div class="col-md-12 col-xl-12 mb-3">
+                                    <div class="card">
+                                        <div class="card-body pb-4 pt-1">
+                                            <div class="col-12 col-md-12">
+                                                <label class="form-label" for="outlet">Pilih Outlet</label>
+                                                <select name="outlet" id="outlet" class="form-control">
+                                                    <option value="Outlet">Cabang Malang</option>
+                                                    <option value="Outlet">Cabang Surabaya</option>
+                                                    <option value="Outlet">Cabang Bojonegoro</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-datatable table-responsive">
-                                <table id="table-produk" class="table">
-                                    <thead class="border-top">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nama Produk</th>
-                                            <th>Kategori</th>
-                                            <th>Harga</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                        </div>
+                        <!-- Users List Table -->
+                        <div class="col-md-12 col-xl-12 col-xl-12 mb-4">
+                            <div class="row">
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-info">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-1</h4>
+                                                <h4 class="pt-3 text-white">Reservasi</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Lihat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-danger">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-2</h4>
+                                                <h4 class="pt-3 text-white">Kosong</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-info">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-3</h4>
+                                                <h4 class="pt-3 text-white">Reservasi</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Lihat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-danger">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-4</h4>
+                                                <h4 class="pt-3 text-white">Kosong</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-info">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-5</h4>
+                                                <h4 class="pt-3 text-white">Reservasi</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Lihat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-danger">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">Meja-6</h4>
+                                                <h4 class="pt-3 text-white">Kosong</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- / Content -->
@@ -141,39 +216,42 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <!-- Tambah produk Modal -->
-    <div class="modal fade" id="tambahproduk" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+    <!-- Tambah Pelanggan Modal -->
+    <div class="modal fade" id="tambahpelanggan" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered modal-lg">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Tambah Produk</h3>
+                        <h3 class="mb-2">Tambah Pelanggan</h3>
                     </div>
                     <form id="form-data" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama_produk">Nama Produk</label>
-                            <input type="text" id="nama_produk" name="nama_produk" class="form-control" placeholder="Misal : Air Mineral" />
+                            <label class="form-label" for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Misal : Budi Waluyo" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="kategori">Kategori</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <?php
-                                foreach ($kategori as $key => $val) {
-                                ?>
-                                    <option value="<?= $val['id'] ?>"> <?= $val['nama_kategori'] ?> </option>
-                                <?php
-                                }
-                                ?>
+                            <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="harga">Harga</label>
-                            <input type="text" id="harga" name="harga" class="form-control" placeholder="Misal : 5000" />
+                            <label class="form-label" for="telephone">Telephone</label>
+                            <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Contoh : 0817-9090-7856" />
                         </div>
-                        <div class="mb-3">
-                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
-                            <input class="form-control" type="file" id="file" name="file">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Contoh : budi@gmail.com" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="alamat">Alamat</label>
+                            <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Contoh : Jl. Perusahaan Gg.5 Surabaya" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="catatan">Catatan</label>
+                            <input type="text" id="catatan" name="catatan" class="form-control" />
                         </div>
 
 
@@ -190,45 +268,48 @@
     </div>
     <!--/ Tambah Pelanggan Modal -->
 
-    <!-- Edit produk Modal -->
-    <div class="modal fade" id="editproduk" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+    <!-- edit pelanggan Modal -->
+    <div class="modal fade" id="editpelanggan" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered modal-lg">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Edit Produk</h3>
+                        <h3 class="mb-2">Edit Pelanggan</h3>
                     </div>
                     <form id="form-data-edit" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama_produk_e">Nama Produk</label>
-                            <input type="text" id="nama_produk_e" name="nama_produk_e" class="form-control" placeholder="Misal : Air Mineral" />
+                            <label class="form-label" for="nama_e">Nama Lengkap</label>
+                            <input type="text" id="nama_e" name="nama_e" class="form-control" placeholder="Misal : Budi Waluyo" />
                             <input type="hidden" id="id_e" name="id_e" class="form-control" />
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="kategori_e">Kategori</label>
-                            <select name="kategori_e" id="kategori_e" class="form-control">
-                                <?php
-                                foreach ($kategori as $key => $val) {
-                                ?>
-                                    <option value="<?= $val['id'] ?>"> <?= $val['nama_kategori'] ?> </option>
-                                <?php
-                                }
-                                ?>
+                            <label class="form-label" for="jenis_kelamin_e">Jenis Kelamin</label>
+                            <select name="jenis_kelamin_e" id="jenis_kelamin_e" class="form-control">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="harga_e">Harga</label>
-                            <input type="text" id="harga_e" name="harga_e" class="form-control" placeholder="Misal : 5000" />
+                            <label class="form-label" for="telephone_e">Telephone</label>
+                            <input type="text" id="telephone_e" name="telephone_e" class="form-control" placeholder="Contoh : 0817-9090-7856" />
                         </div>
-                        <div class="mb-3">
-                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
-                            <input class="form-control" type="file" id="file_e" name="file_e">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="email_e">Email</label>
+                            <input type="text" id="email_e" name="email_e" class="form-control" placeholder="Contoh : budi@gmail.com" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="alamat_e">Alamat</label>
+                            <input type="text" id="alamat_e" name="alamat_e" class="form-control" placeholder="Contoh : Jl. Perusahaan Gg.5 Surabaya" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="catatan_e">Catatan</label>
+                            <input type="text" id="catatan_e" name="catatan_e" class="form-control" />
                         </div>
 
 
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Ubah</button>
                             <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
                                 Cancel
                             </button>
@@ -238,9 +319,7 @@
             </div>
         </div>
     </div>
-    <!--/ Tambah Pelanggan Modal -->
-
-
+    <!--/ edit pelanggan Modal -->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -280,7 +359,7 @@
 <script>
     <?php $target = 0; ?>
     $(function() {
-        $("#table-produk").DataTable({
+        $("#table-pelanggan").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
@@ -291,11 +370,8 @@
             ],
             'ajax': {
                 'dataType': 'json',
-                'url': '<?= base_url() ?>produk/ajax_table_produk',
-                'type': 'post',
-                'data': {
-                    id_mst_bisnis: '<?= $id_mst_bisnis ?>'
-                }
+                'url': '<?= base_url() ?>customer/ajax_table_pelanggan',
+                'type': 'post'
             },
             'columns': [{
                     "target": [<?= $target ?>],
@@ -306,22 +382,28 @@
                     "className": 'text-left py-1',
                     "data": "data",
                     "render": function(data) {
-                        return `<div class="d-flex justify-content-start align-items-center product-name">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar avatar me-2 rounded-2 bg-label-secondary"><img src="<?= base_url('assets/template-admin/assets/food/') ?>` + data.gambar + `" alt="Product" class="rounded-2"></div>
-                                    </div>
-                                        <div class="d-flex flex-column"><h6 class="text-body text-nowrap mb-0">` + data.nama_produk + `</h6><div>` + data.sku + `</div></div>
-                                        
-                                </div>`
+                        return `<h5 class="mb-0">` + data.nama + `</h5><span>` + data.kode_pelanggan + `</span>`
                     }
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.kategori",
+                    "data": "data.jenis_kelamin",
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.harga",
+                    "data": "data.telephone",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.email",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.alamat",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.catatan",
                 },
                 {
                     "target": [<?= $target ?>],
@@ -329,7 +411,7 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama_produk + `','` + data.harga + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama + `','` + data.telephone + `','` + data.email + `','` + data.alamat + `','` + data.catatan + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
                                     
                                 </div>`
@@ -343,13 +425,13 @@
     });
 
     function reload_table() {
-        $('#table-produk').DataTable().ajax.reload(null, false);
+        $('#table-pelanggan').DataTable().ajax.reload(null, false);
     }
 
     $("#form-data").submit(function(e) {
         e.preventDefault()
 
-        if ($('#nama_produk').val() == '' || $('#harga').val() == '') {
+        if ($('#nama').val() == '' || $('#jenis_kelamin').val() == '' || $('#telephone').val() == '' || $('#email').val() == '' || $('#alamat').val() == '' || $('#catatan').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -363,19 +445,16 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'mst_produk');
-        form_data.append('nama_produk', $("#nama_produk").val());
-        form_data.append('id_mst_kategori', $("#kategori").val());
-        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
-        form_data.append('harga', $("#harga").val());
+        form_data.append('table', 'tbl_pelanggan');
+        form_data.append('nama', $("#nama").val());
+        form_data.append('jenis_kelamin', $("#jenis_kelamin").val());
+        form_data.append('telephone', $("#telephone").val());
+        form_data.append('email', $("#email").val());
+        form_data.append('alamat', $("#alamat").val());
+        form_data.append('catatan', $("#catatan").val());
+        form_data.append('kategori', 'tambah');
 
-
-        if ($('#file').val() !== "") {
-            var file_data = $('#file').prop('files')[0];
-            form_data.append('file', file_data);
-        }
-
-        var url_ajax = '<?= base_url() ?>produk/insert_data_produk'
+        var url_ajax = '<?= base_url() ?>customer/insert_data_pelanggan'
 
         $.ajax({
             url: url_ajax,
@@ -387,9 +466,23 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    $('#nama_produk').val('')
-                    $('#harga').val('')
-                    $('#tambahproduk').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'berhasil tambah data',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                    $('#nama').val('')
+                    $('#telephone').val('')
+                    $('#email').val('')
+                    $('#alamat').val('')
+                    $('#catatan').val('')
+                    $('#tambahpelanggan').modal('hide');
                     reload_table()
 
                 } else {
@@ -420,7 +513,7 @@
 
 
     function tambaho() {
-        $('#tambahproduk').modal('show')
+        $('#tambahpelanggan').modal('show')
     }
 
     function delete_data(id) {
@@ -441,15 +534,23 @@
             if (result.value) {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url() ?>produk/delete_data',
+                        url: '<?= base_url() ?>customer/delete_data',
                         data: {
                             id: id,
-                            table: "mst_produk"
+                            table: "tbl_pelanggan"
                         },
                         type: 'post',
                         dataType: 'json',
                         success: function(result) {
                             if (result.status == "success") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Terhapus!',
+                                    text: 'Data berhasil dihapus',
+                                    customClass: {
+                                        confirmButton: 'btn btn-success'
+                                    }
+                                });
                                 reload_table()
                             } else
                                 Swal.fire({
@@ -468,18 +569,21 @@
         });
     }
 
-    function edito(id, nama, harga) {
-        $('#editproduk').modal('show')
+    function edito(id, nama, telephone, email, alamat, catatan) {
+        $('#editpelanggan').modal('show')
 
         $('#id_e').val(id)
-        $('#nama_produk_e').val(nama)
-        $('#harga_e').val(harga)
+        $('#nama_e').val(nama)
+        $('#telephone_e').val(telephone)
+        $('#email_e').val(email)
+        $('#alamat_e').val(alamat)
+        $('#catatan_e').val(catatan)
     }
 
     $("#form-data-edit").submit(function(e) {
         e.preventDefault()
 
-        if ($('#nama_produk_e').val() == '' || $('#harga_e').val() == '') {
+        if ($('#nama_e').val() == '' || $('#telephone_e').val() == '' || $('#email_e').val() == '' || $('#alamat_e').val() == '' || $('#catatan_e').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -493,18 +597,17 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'mst_produk');
-        form_data.append('nama_produk', $("#nama_produk_e").val());
-        form_data.append('id_mst_kategori', $("#kategori_e").val());
-        form_data.append('harga', $("#harga_e").val());
+        form_data.append('table', 'tbl_pelanggan');
         form_data.append('id', $("#id_e").val());
+        form_data.append('nama', $("#nama_e").val());
+        form_data.append('jenis_kelamin', $("#jenis_kelamin_e").val());
+        form_data.append('telephone', $("#telephone_e").val());
+        form_data.append('email', $("#email_e").val());
+        form_data.append('alamat', $("#alamat_e").val());
+        form_data.append('catatan', $("#catatan_e").val());
+        form_data.append('kategori', 'edit');
 
-        if ($('#file_e').val() !== "") {
-            var file_data = $('#file_e').prop('files')[0];
-            form_data.append('file', file_data);
-        }
-
-        var url_ajax = '<?= base_url() ?>produk/edit_data_produk'
+        var url_ajax = '<?= base_url() ?>customer/insert_data_pelanggan'
 
         $.ajax({
             url: url_ajax,
@@ -516,14 +619,25 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    $('#editproduk').modal('hide');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'berhasil ubah data',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                    $('#editpelanggan').modal('hide');
                     reload_table()
 
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Gagal tambah data',
+                        text: 'Gagal ubah data',
                         customClass: {
                             confirmButton: 'btn btn-primary'
                         },
@@ -544,82 +658,4 @@
             }
         })
     })
-
-    function change(id, data) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_kelola_stok',
-            data: {
-                id: id,
-                kelola_stok: data
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
-
-    function ubah_stok(id) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_stok',
-            data: {
-                id: id,
-                stok: $('#stok' + id).val()
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
-
-    function ubah_minimum_stok(id) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_minimum_stok',
-            data: {
-                id: id,
-                minimum_stok: $('#minimum_stok' + id).val()
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
 </script>

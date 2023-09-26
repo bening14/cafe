@@ -94,22 +94,22 @@
                             <div class="card-header border-bottom" style="text-align: right;">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h5>Produk</h5>
+                                        <h5>Kategori</h5>
                                     </div>
                                     <div>
 
-                                        <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-salad"></i> Tambah</button>
+                                        <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-category-2"></i> Tambah</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-datatable table-responsive">
-                                <table id="table-produk" class="table">
+                                <table id="table-kategori" class="table">
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Produk</th>
-                                            <th>Kategori</th>
-                                            <th>Harga</th>
+                                            <th>Nama Kategori</th>
+                                            <th>Outlet</th>
+                                            <th>Jumlah Produk</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -141,41 +141,41 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <!-- Tambah produk Modal -->
-    <div class="modal fade" id="tambahproduk" tabindex="-1" aria-hidden="true">
+    <!-- Tambah kategori Modal -->
+    <div class="modal fade" id="tambahkategori" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Tambah Produk</h3>
+                        <h3 class="mb-2">Tambah Kategori</h3>
                     </div>
-                    <form id="form-data" class="row g-3">
+                    <form action="<?= base_url('produk/addkategori') ?>" method="post" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama_produk">Nama Produk</label>
-                            <input type="text" id="nama_produk" name="nama_produk" class="form-control" placeholder="Misal : Air Mineral" />
+                            <label class="form-label" for="nama_kategori">Nama Kategori</label>
+                            <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" placeholder="Misal : Makanan" required />
+                            <input type="hidden" id="id_mst_bisnis" name="id_mst_bisnis" class="form-control" value="<?= $id_mst_bisnis ?>" />
                         </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="kategori">Kategori</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <?php
-                                foreach ($kategori as $key => $val) {
-                                ?>
-                                    <option value="<?= $val['id'] ?>"> <?= $val['nama_kategori'] ?> </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
+                        <div class="col-12 col-md-12 border-top">
+                            <label class="form-label mt-3" for="nilai_promo">Pilih Outlet</label>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" value="semua" id="semua" name="semua" checked />
+                                <label class="form-check-label" for="semua"> Semua Outlet </label>
+                            </div>
+                            <?php
+                            $no = 1;
+                            foreach ($outlet as $key => $value) {
+                            ?>
+                                <div class="form-check mt-3">
+                                    <input class="form-check-input" type="checkbox" value="<?= $value['id'] . '-' . $value['nama_outlet'] ?>" id="<?= $value['id'] ?>" name="<?= 'outlet-' . $no ?>" />
+                                    <label class="form-check-label" for="<?= $value['id'] ?>"> <?= $value['nama_outlet'] ?> </label>
+                                </div>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                            <input type="hidden" name="jumlah_outlet" value="<?php echo $no - 1; ?>" />
                         </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="harga">Harga</label>
-                            <input type="text" id="harga" name="harga" class="form-control" placeholder="Misal : 5000" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
-                            <input class="form-control" type="file" id="file" name="file">
-                        </div>
-
 
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
@@ -188,47 +188,28 @@
             </div>
         </div>
     </div>
-    <!--/ Tambah Pelanggan Modal -->
+    <!--/ Tambah kategori Modal -->
 
-    <!-- Edit produk Modal -->
-    <div class="modal fade" id="editproduk" tabindex="-1" aria-hidden="true">
+
+    <!-- edit pelanggan Modal -->
+    <div class="modal fade" id="editkategori" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Edit Produk</h3>
+                        <h3 class="mb-2">Edit Kategori</h3>
                     </div>
                     <form id="form-data-edit" class="row g-3">
                         <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama_produk_e">Nama Produk</label>
-                            <input type="text" id="nama_produk_e" name="nama_produk_e" class="form-control" placeholder="Misal : Air Mineral" />
+                            <label class="form-label" for="nama_kategori_e">Nama Kategori</label>
+                            <input type="text" id="nama_kategori_e" name="nama_kategori_e" class="form-control" placeholder="Misal : Makanan" />
                             <input type="hidden" id="id_e" name="id_e" class="form-control" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="kategori_e">Kategori</label>
-                            <select name="kategori_e" id="kategori_e" class="form-control">
-                                <?php
-                                foreach ($kategori as $key => $val) {
-                                ?>
-                                    <option value="<?= $val['id'] ?>"> <?= $val['nama_kategori'] ?> </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="harga_e">Harga</label>
-                            <input type="text" id="harga_e" name="harga_e" class="form-control" placeholder="Misal : 5000" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="gambar" class="form-label">Gambar (Ukuran Max 1Mb)</label>
-                            <input class="form-control" type="file" id="file_e" name="file_e">
                         </div>
 
 
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Ubah</button>
                             <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
                                 Cancel
                             </button>
@@ -238,8 +219,7 @@
             </div>
         </div>
     </div>
-    <!--/ Tambah Pelanggan Modal -->
-
+    <!--/ edit pelanggan Modal -->
 
 
     <!-- Core JS -->
@@ -280,7 +260,7 @@
 <script>
     <?php $target = 0; ?>
     $(function() {
-        $("#table-produk").DataTable({
+        $("#table-kategori").DataTable({
             "responsive": true,
             "lengthChange": true,
             "autoWidth": false,
@@ -291,11 +271,8 @@
             ],
             'ajax': {
                 'dataType': 'json',
-                'url': '<?= base_url() ?>produk/ajax_table_produk',
-                'type': 'post',
-                'data': {
-                    id_mst_bisnis: '<?= $id_mst_bisnis ?>'
-                }
+                'url': '<?= base_url() ?>produk/ajax_table_kategori',
+                'type': 'post'
             },
             'columns': [{
                     "target": [<?= $target ?>],
@@ -304,24 +281,15 @@
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-left py-1',
-                    "data": "data",
-                    "render": function(data) {
-                        return `<div class="d-flex justify-content-start align-items-center product-name">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar avatar me-2 rounded-2 bg-label-secondary"><img src="<?= base_url('assets/template-admin/assets/food/') ?>` + data.gambar + `" alt="Product" class="rounded-2"></div>
-                                    </div>
-                                        <div class="d-flex flex-column"><h6 class="text-body text-nowrap mb-0">` + data.nama_produk + `</h6><div>` + data.sku + `</div></div>
-                                        
-                                </div>`
-                    }
+                    "data": "data.nama_kategori",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-left py-1',
+                    "data": "data.nama_outlet",
                 }, {
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
-                    "data": "data.kategori",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.harga",
+                    "data": "data.jumlah_produk",
                 },
                 {
                     "target": [<?= $target ?>],
@@ -329,7 +297,7 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama_produk + `','` + data.harga + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama_kategori + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
                                     
                                 </div>`
@@ -343,84 +311,12 @@
     });
 
     function reload_table() {
-        $('#table-produk').DataTable().ajax.reload(null, false);
+        $('#table-kategori').DataTable().ajax.reload(null, false);
     }
-
-    $("#form-data").submit(function(e) {
-        e.preventDefault()
-
-        if ($('#nama_produk').val() == '' || $('#harga').val() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Tidak boleh ada kolom kosong!',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false
-            })
-            return
-        }
-
-        var form_data = new FormData();
-        form_data.append('table', 'mst_produk');
-        form_data.append('nama_produk', $("#nama_produk").val());
-        form_data.append('id_mst_kategori', $("#kategori").val());
-        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
-        form_data.append('harga', $("#harga").val());
-
-
-        if ($('#file').val() !== "") {
-            var file_data = $('#file').prop('files')[0];
-            form_data.append('file', file_data);
-        }
-
-        var url_ajax = '<?= base_url() ?>produk/insert_data_produk'
-
-        $.ajax({
-            url: url_ajax,
-            type: "post",
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            dataType: "json",
-            success: function(result) {
-                if (result.status == "success") {
-                    $('#nama_produk').val('')
-                    $('#harga').val('')
-                    $('#tambahproduk').modal('hide');
-                    reload_table()
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Gagal tambah data',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                }
-            },
-            error: function(err) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Telah terjadi kesalahan, silahkan contact CS',
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                })
-            }
-        })
-    })
 
 
     function tambaho() {
-        $('#tambahproduk').modal('show')
+        $('#tambahkategori').modal('show')
     }
 
     function delete_data(id) {
@@ -444,7 +340,7 @@
                         url: '<?= base_url() ?>produk/delete_data',
                         data: {
                             id: id,
-                            table: "mst_produk"
+                            table: "mst_kategori"
                         },
                         type: 'post',
                         dataType: 'json',
@@ -468,18 +364,17 @@
         });
     }
 
-    function edito(id, nama, harga) {
-        $('#editproduk').modal('show')
+    function edito(id, nama) {
+        $('#editkategori').modal('show')
 
         $('#id_e').val(id)
-        $('#nama_produk_e').val(nama)
-        $('#harga_e').val(harga)
+        $('#nama_kategori_e').val(nama)
     }
 
     $("#form-data-edit").submit(function(e) {
         e.preventDefault()
 
-        if ($('#nama_produk_e').val() == '' || $('#harga_e').val() == '') {
+        if ($('#nama_kategori_e').val() == '') {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -493,18 +388,12 @@
         }
 
         var form_data = new FormData();
-        form_data.append('table', 'mst_produk');
-        form_data.append('nama_produk', $("#nama_produk_e").val());
-        form_data.append('id_mst_kategori', $("#kategori_e").val());
-        form_data.append('harga', $("#harga_e").val());
+        form_data.append('table', 'mst_kategori');
         form_data.append('id', $("#id_e").val());
+        form_data.append('nama_kategori', $("#nama_kategori_e").val());
+        form_data.append('kategori', 'edit');
 
-        if ($('#file_e').val() !== "") {
-            var file_data = $('#file_e').prop('files')[0];
-            form_data.append('file', file_data);
-        }
-
-        var url_ajax = '<?= base_url() ?>produk/edit_data_produk'
+        var url_ajax = '<?= base_url() ?>produk/insert_data_kategori'
 
         $.ajax({
             url: url_ajax,
@@ -516,14 +405,14 @@
             dataType: "json",
             success: function(result) {
                 if (result.status == "success") {
-                    $('#editproduk').modal('hide');
+                    $('#editkategori').modal('hide');
                     reload_table()
 
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Gagal tambah data',
+                        text: 'Gagal ubah data',
                         customClass: {
                             confirmButton: 'btn btn-primary'
                         },
@@ -544,82 +433,4 @@
             }
         })
     })
-
-    function change(id, data) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_kelola_stok',
-            data: {
-                id: id,
-                kelola_stok: data
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
-
-    function ubah_stok(id) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_stok',
-            data: {
-                id: id,
-                stok: $('#stok' + id).val()
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
-
-    function ubah_minimum_stok(id) {
-        $.ajax({
-            url: '<?= base_url() ?>produk/ubah_minimum_stok',
-            data: {
-                id: id,
-                minimum_stok: $('#minimum_stok' + id).val()
-            },
-            type: 'post',
-            dataType: 'json',
-            success: function(result) {
-                if (result.status == "success") {
-                    reload_table()
-                } else
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Telah terjadi kesalahan, silahkan contact CS',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-            }
-        })
-    }
 </script>

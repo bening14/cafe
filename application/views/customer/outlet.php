@@ -90,7 +90,7 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row g-4 mb-4">
-                            <div class="col-xl-4 mb-4 col-lg-5 col-12">
+                            <div class="col-xl-6 mb-4 col-lg-6 col-12">
                                 <div class="card">
                                     <div class="d-flex align-items-end row">
                                         <?php
@@ -101,7 +101,7 @@
                                                     <h5 class=" card-title mb-0 text-muted">Nama Bisnis</h5>
                                                     <h3 class="mt-2 mb-0"><?= $nama_bisnis ?></h3>
                                                     <h5 class="text mb-3"><?= $kode_bisnis ?></h5>
-                                                    <a href="<?= base_url('customer/bisnis') ?>" class="btn btn-primary">Lihat Bisnis</a>
+                                                    <a href="<?= base_url('customer/bisnis') ?>" class="btn btn-primary">Bisnis Anda</a>
                                                 </div>
                                             </div>
                                         <?php
@@ -130,7 +130,7 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho('<?= $id_mst_bisnis ?>')"><i class="ti ti-building-store"></i> Tambah Outlet</button>
+                                <button class="btn btn-sm btn-info" onclick="tambaho('<?= $id_mst_bisnis ?>')"><i class="ti ti-building-store"></i> Tambah Outlet</button>
                             </div>
                             <div class="card-datatable table-responsive">
                                 <table id="table-outlet" class="table">
@@ -327,6 +327,7 @@
                         return `<div class="d-flex align-items-center">
                                     <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama_outlet + `','` + data.lokasi + `','` + data.phone + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
                                     <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
+                                    <a href="<?= base_url('customer/kelola_outlet/') ?>` + data.id + `" type="button" class="btn btn-sm btn-success waves-effect waves-light">Kelola Outlet</a>
                                     
                                 </div>`
                     }

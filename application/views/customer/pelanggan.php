@@ -92,7 +92,7 @@
                         <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header border-bottom" style="text-align: right;">
-                                <button class="btn btn-sm btn-danger" onclick="tambaho()"><i class="ti ti-users"></i> Tambah Pelanggan</button>
+                                <button class="btn btn-sm btn-info" onclick="tambaho()"><i class="ti ti-users"></i> Tambah Pelanggan</button>
                             </div>
                             <div class="card-datatable table-responsive">
                                 <table id="table-pelanggan" class="table">

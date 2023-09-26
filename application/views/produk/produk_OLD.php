@@ -107,9 +107,13 @@
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Produk</th>
+                                            <th>Produk</th>
                                             <th>Kategori</th>
                                             <th>Harga</th>
+                                            <th>Kelola Stok</th>
+                                            <th>Jumlah Stok</th>
+                                            <th>Minimum Stok</th>
+                                            <th>Outlet</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -292,10 +296,7 @@
             'ajax': {
                 'dataType': 'json',
                 'url': '<?= base_url() ?>produk/ajax_table_produk',
-                'type': 'post',
-                'data': {
-                    id_mst_bisnis: '<?= $id_mst_bisnis ?>'
-                }
+                'type': 'post'
             },
             'columns': [{
                     "target": [<?= $target ?>],
@@ -322,6 +323,42 @@
                     "target": [<?= $target ?>],
                     "className": 'text-center py-1',
                     "data": "data.harga",
+                },
+                {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        if (data.kelola_stok == 'TIDAK') {
+                            return `<button type="button" class="btn btn-danger btn-sm waves-effect waves-light" onclick="change('` + data.id + `','YA')"><i class="ti ti-arrows-exchange-2"></i> Tidak</button>`
+                        } else {
+                            return `<button type="button" class="btn btn-success btn-sm waves-effect waves-light" onclick="change('` + data.id + `','TIDAK')"><i class="ti ti-arrows-exchange-2"></i> Ya</button>`
+                        }
+                    }
+                },
+                {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        if (data.kelola_stok == 'TIDAK') {
+                            return `<input type="text" id="stok" name="stok" class="form-control" value="` + data.stok + `" disabled />`
+                        } else {
+                            return `<input type="text" id="stok` + data.id + `" name="stok" class="form-control" value="` + data.stok + `" onkeyup="ubah_stok('` + data.id + `')" />`
+                        }
+                    }
+                },
+                {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        if (data.kelola_stok == 'TIDAK') {
+                            return `<input type="text" id="minimum_stok" name="minimum_stok" class="form-control" value="` + data.minimum_stok + `" disabled />`
+                        } else {
+                            return `<input type="text" id="minimum_stok` + data.id + `" name="minimum_stok" class="form-control" value="` + data.minimum_stok + `" onkeyup="ubah_minimum_stok('` + data.id + `')" />`
+                        }
+                    }
                 },
                 {
                     "target": [<?= $target ?>],
@@ -366,7 +403,6 @@
         form_data.append('table', 'mst_produk');
         form_data.append('nama_produk', $("#nama_produk").val());
         form_data.append('id_mst_kategori', $("#kategori").val());
-        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
         form_data.append('harga', $("#harga").val());
 
 

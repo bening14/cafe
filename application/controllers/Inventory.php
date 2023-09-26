@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Customer extends CI_Controller
+class Inventory extends CI_Controller
 {
     public function __construct()
     {
@@ -12,12 +12,75 @@ class Customer extends CI_Controller
             redirect('auth');
         }
         $this->load->model("Crud", "crud");
+        $this->load->model("M_inventory", "m_inventory");
     }
 
     public function index()
     {
-        $this->load->view('customer/admin');
+        $a = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $a['id']])->result_array();
+        $data['kategori'] = $this->crud->get_where('mst_kategori', ['id_mst_bisnis' => $a['id']])->result_array();
+
+        $this->load->view('inventory/kartu_stok', $data);
     }
+
+    public function ajax_table_kartu_stok()
+    {
+        $where = [];
+        $table = 'tbl_kartu_stok'; //nama tabel dari database
+        $column_order = array('id', 'sku', 'nama_produk', 'id_mst_kategori', 'nama_kategori', 'stok_awal', 'stok_masuk', 'stok_keluar', 'penjualan', 'transfer', 'penyesuaian', 'stok_akhir', 'satuan', 'id_mst_outlet', 'nama_outlet', 'tanggal_pengakuan', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'sku', 'nama_produk', 'id_mst_kategori', 'nama_kategori', 'stok_awal', 'stok_masuk', 'stok_keluar', 'penjualan', 'transfer', 'penyesuaian', 'stok_akhir', 'satuan', 'id_mst_outlet', 'nama_outlet', 'tanggal_pengakuan', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, sku, nama_produk, id_mst_kategori, nama_kategori, stok_awal, stok_masuk, stok_keluar, penjualan, transfer, penyesuaian, stok_akhir, satuan, id_mst_outlet, nama_outlet, tanggal_pengakuan, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->m_inventory->get_datatables($table, $select, $column_order, $column_search, $order, $where);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['sku'] = $key->sku;
+            $row['data']['nama_produk'] = $key->nama_produk;
+            $row['data']['id_mst_kategori'] = $key->id_mst_kategori;
+            $row['data']['nama_kategori'] = $key->nama_kategori;
+            $row['data']['stok_awal'] = $key->stok_awal;
+            $row['data']['stok_masuk'] = $key->stok_masuk;
+            $row['data']['stok_keluar'] = $key->stok_keluar;
+            $row['data']['penjualan'] = $key->penjualan;
+            $row['data']['transfer'] = $key->transfer;
+            $row['data']['penyesuaian'] = $key->penyesuaian;
+            $row['data']['stok_akhir'] = $key->stok_akhir;
+            $row['data']['satuan'] = $key->satuan;
+            $row['data']['id_mst_outlet'] = $key->id_mst_outlet;
+            $row['data']['nama_outlet'] = $key->nama_outlet;
+            $row['data']['tanggal_pengakuan'] = $key->tanggal_pengakuan;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_inventory->count_all($table),
+            "recordsFiltered" => $this->m_inventory->count_filtered($table, $select, $column_order, $column_search, $order, $where),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public function bisnis()
     {
@@ -53,19 +116,6 @@ class Customer extends CI_Controller
         $data['id_mst_bisnis'] = $r['id'];
 
         $this->load->view('customer/outlet', $data);
-    }
-
-    public function kelola_outlet()
-    {
-        $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
-
-        $data['id_mst_bisnis'] = $r['id'];
-        $data['id'] = $this->uri->segment('3'); // id_mst_outlet
-        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id' => $data['id']])->row_array();
-        $data['kategori'] = $this->crud->get_all('mst_kategori')->result_array();
-        $data['pajak'] = $this->crud->get_where('tbl_pajak_layanan', ['id_mst_bisnis' => $r['id']])->result_array();
-
-        $this->load->view('customer/kelola_outlet', $data);
     }
 
     public function pajak()
@@ -176,56 +226,11 @@ class Customer extends CI_Controller
             'id_mst_bisnis =' => $this->input->post('id_mst_bisnis')
         );
         $table = 'tbl_pajak_layanan'; //nama tabel dari database
-        $column_order = array('id', 'id_mst_bisnis', 'nama_biaya', 'jenis', 'satuan', 'jumlah', 'sifat', 'date_created'); //field yang ada di table user
-        $column_search = array('id', 'id_mst_bisnis', 'nama_biaya', 'jenis', 'satuan', 'jumlah', 'sifat', 'date_created'); //field yang diizin untuk pencarian 
-        $select = 'id, id_mst_bisnis, nama_biaya, jenis, satuan, jumlah, sifat, date_created';
-        $order = array('id' => 'asc'); // default order 
-        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where, $where);
-        $data = array();
-        $no = $_POST['start'];
-        foreach ($list as $key) {
-            $no++;
-            $row = array();
-            $row['data']['no'] = $no;
-            $row['data']['id'] = $key->id;
-            $row['data']['id_mst_bisnis'] = $key->id_mst_bisnis;
-            $row['data']['nama_biaya'] = $key->nama_biaya;
-            $row['data']['jenis'] = $key->jenis;
-            $row['data']['satuan'] = $key->satuan;
-            $row['data']['jumlah'] = $key->jumlah;
-            $row['data']['sifat'] = $key->sifat;
-            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
-
-            $data[] = $row;
-        }
-
-        $output = array(
-            "draw" => $_POST['draw'],
-            "recordsTotal" => $this->crud->count_all($table),
-            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where, $where),
-            "data" => $data,
-            "query" => $this->db->last_query()
-        );
-        //output to json format
-        echo json_encode($output);
-    }
-
-    public function ajax_table_pajak_cabang()
-    {
-        // echo $this->input->post('id_mst_bisnis');
-        // die;
-        // $where = array(
-        //     'id_mst_bisnis =' => $this->input->post('id_mst_bisnis')
-        // );
-        $where = array(
-            'id_mst_outlet =' => $this->input->post('id')
-        );
-        $table = 'tbl_pajak_layanan_cabang'; //nama tabel dari database
         $column_order = array('id', 'id_mst_bisnis', 'nama_biaya', 'jenis', 'satuan', 'jumlah', 'date_created'); //field yang ada di table user
         $column_search = array('id', 'id_mst_bisnis', 'nama_biaya', 'jenis', 'satuan', 'jumlah', 'date_created'); //field yang diizin untuk pencarian 
         $select = 'id, id_mst_bisnis, nama_biaya, jenis, satuan, jumlah, date_created';
         $order = array('id' => 'asc'); // default order 
-        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where, $where);
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $key) {
@@ -246,7 +251,7 @@ class Customer extends CI_Controller
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->crud->count_all($table),
-            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where, $where),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where),
             "data" => $data,
             "query" => $this->db->last_query()
         );
@@ -292,14 +297,9 @@ class Customer extends CI_Controller
 
             $insert_data = $this->crud->update($table, $data, $where);
         }
-        //buat session array id_mst_bisnis
-        $data = array(
-            'id_mst_bisnis' => '1'
-        );
-        $this->session->set_userdata($data);
+
 
         if ($insert_data > 0) {
-
             $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
         } else
             $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
@@ -387,70 +387,10 @@ class Customer extends CI_Controller
         echo json_encode($response);
     }
 
-    public function insert_data_pajak_cabang()
-    {
-        $table = $this->input->post("table");
-        $id = $this->input->post("id");
-        $id_mst_outlet = $this->input->post("id_mst_outlet");
-
-
-        $data = $this->input->post();
-        $a = $this->crud->get_where('tbl_pajak_layanan', ['id' => $id])->row_array();
-        unset($data['table']);
-        unset($data['id']);
-
-        $data['id_tbl_pajak_layanan'] = $id;
-        $data['id_mst_bisnis'] = $a['id_mst_bisnis'];
-        $data['nama_biaya'] = $a['nama_biaya'];
-        $data['jenis'] = $a['jenis'];
-        $data['satuan'] = $a['satuan'];
-        $data['jumlah'] = $a['jumlah'];
-        $data['id_mst_outlet'] = $id_mst_outlet;
-
-        // echo '<pre>';
-        // var_dump($data);
-        // echo '</pre>';
-        // die;
-
-
-
-        $insert_data = $this->crud->insert($table, $data);
-
-
-
-        if ($insert_data > 0) {
-
-            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
-        } else
-            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
-
-        echo json_encode($response);
-    }
-
     public function delete_data()
     {
         $table = $this->input->post('table');
         if ($this->crud->delete($table, ['id' => $this->input->post('id')])) {
-            $response = ['status' => 'success', 'message' => 'Success Delete Data!'];
-        } else
-            $response = ['status' => 'failed', 'message' => 'Error Delete Data!'];
-
-        echo json_encode($response);
-    }
-
-    public function delete_data_bisnis()
-    {
-        $table = $this->input->post('table');
-        if ($this->crud->delete($table, ['id' => $this->input->post('id')])) {
-            $this->crud->update('mst_user', ['id_mst_bisnis' => '0'], ['id' => $this->session->userdata('id')]);
-            //hapus session array id_mst_bisnis
-            $this->session->unset_userdata('id_mst_bisnis');
-            //buat session array id_mst_bisnis
-            $data = array(
-                'id_mst_bisnis' => '0'
-            );
-            $this->session->set_userdata($data);
-
             $response = ['status' => 'success', 'message' => 'Success Delete Data!'];
         } else
             $response = ['status' => 'failed', 'message' => 'Error Delete Data!'];
@@ -522,8 +462,6 @@ class Customer extends CI_Controller
 
             unset($data['kategori']);
 
-            $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
-            $data['id_mst_bisnis'] = $r['id'];
 
             $insert_data = $this->crud->insert($table, $data);
         } else {
@@ -548,10 +486,7 @@ class Customer extends CI_Controller
 
     public function promo()
     {
-        $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
-
-        $data['promo'] = $this->crud->count_where('tbl_promo_khusus', ['id_mst_bisnis' => $r['id']]);
-        $this->load->view('customer/promo', $data);
+        $this->load->view('customer/promo');
     }
 
     public function promo_khusus()
@@ -559,7 +494,6 @@ class Customer extends CI_Controller
         $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
 
         $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $r['id']])->result_array();
-        $data['id_mst_bisnis'] = $r['id'];
 
         $this->load->view('customer/promo_khusus', $data);
     }
@@ -608,7 +542,6 @@ class Customer extends CI_Controller
         $jenis = $_POST['jenis'];
         $nilai_promo = $_POST['nilai_promo'];
         $count = $_POST['jumlah_outlet'];
-        $id_mst_bisnis = $_POST['id_mst_bisnis'];
 
         //GENERATE KODE PROMO
         $d = $this->crud->get_all_limit('tbl_promo_khusus')->row_array();
@@ -632,10 +565,9 @@ class Customer extends CI_Controller
                     'nama_promo' => $nama_promo,
                     'jenis' => $jenis,
                     'nilai_promo' => $nilai_promo,
-                    'id_mst_bisnis' => $id_mst_bisnis,
                     'id_mst_outlet' => $val['id'],
                     'nama_outlet' => $val['nama_outlet'],
-                    'status' => 'Aktif'
+                    'status' => 'Active'
                 );
                 $this->crud->insert('tbl_promo_khusus', $data2);
             }
@@ -651,9 +583,8 @@ class Customer extends CI_Controller
                         'jenis' => $jenis,
                         'nilai_promo' => $nilai_promo,
                         'id_mst_outlet' => $a[0],
-                        'id_mst_bisnis' => $id_mst_bisnis,
                         'nama_outlet' => $a[1],
-                        'status' => 'Aktif',
+                        'status' => 'Active',
                     );
                     $this->crud->insert('tbl_promo_khusus', $data);
                 }
@@ -662,37 +593,6 @@ class Customer extends CI_Controller
 
 
         redirect('customer/promo_khusus');
-    }
-
-    public function ubah_aktif()
-    {
-        $data = $this->input->post('data');
-        $id = $this->input->post('id');
-
-        $update = $this->crud->update('tbl_promo_khusus', ['status' => $data], ['id' => $id]);
-
-        if ($update > 0) {
-            $response = ['status' => 'success', 'message' => 'Berhasil Ubah Data!'];
-        } else
-            $response = ['status' => 'error', 'message' => 'Gagal Ubah Data!'];
-
-        echo json_encode($response);
-    }
-
-    public function showdatapajak()
-    {
-        $data = $this->input->post();
-        // var_dump($data);
-        // die;
-
-        $result = $this->crud->get_where('tbl_pajak_layanan', ['id' => $data['id']])->row_array();
-
-        echo json_encode($result);
-    }
-
-    public function status_meja()
-    {
-        $this->load->view('customer/status_meja');
     }
 
     public function manajer()

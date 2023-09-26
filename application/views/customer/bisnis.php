@@ -90,7 +90,7 @@
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row g-4 mb-4">
-                            <div class="col-xl-4 mb-4 col-lg-5 col-12">
+                            <div class="col-xl-6 mb-6 col-lg-6 col-12">
                                 <div class="card">
                                     <div class="d-flex align-items-end row">
                                         <?php
@@ -101,7 +101,7 @@
                                                     <h5 class=" card-title mb-0 text-muted">Nama Bisnis</h5>
                                                     <h3 class="mt-2 mb-0"><?= $nama_bisnis ?></h3>
                                                     <h5 class="text mb-3"><?= $kode_bisnis ?></h5>
-                                                    <a href="<?= base_url('customer/bisnis') ?>" class="btn btn-primary">Lihat Bisnis</a>
+                                                    <a href="<?= base_url('customer/bisnis') ?>" class="btn btn-primary">Bisnis Anda</a>
                                                 </div>
                                             </div>
                                         <?php
@@ -677,7 +677,7 @@
             if (result.value) {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '<?= base_url() ?>customer/delete_data',
+                        url: '<?= base_url() ?>customer/delete_data_bisnis',
                         data: {
                             id: id,
                             table: "mst_bisnis"
