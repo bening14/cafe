@@ -75,9 +75,9 @@ class Produk extends CI_Controller
         );
 
         $table = 'mst_kategori_cabang'; //nama tabel dari database
-        $column_order = array('id', 'id_mst_bisnis', 'nama_kategori', 'id_mst_outlet', 'date_created'); //field yang ada di table user
-        $column_search = array('id', 'id_mst_bisnis', 'nama_kategori', 'id_mst_outlet', 'date_created'); //field yang diizin untuk pencarian 
-        $select = 'id, id_mst_bisnis, nama_kategori, id_mst_outlet, date_created';
+        $column_order = array('id', 'id_mst_bisnis', 'nama_kategori', 'id_mst_outlet', 'id_mst_kategori', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'id_mst_bisnis', 'nama_kategori', 'id_mst_outlet', 'id_mst_kategori', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, id_mst_bisnis, nama_kategori, id_mst_outlet, id_mst_kategori, date_created';
         $order = array('id' => 'asc'); // default order 
         $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
         $data = array();
@@ -90,7 +90,7 @@ class Produk extends CI_Controller
             $row['data']['id_mst_bisnis'] = $key->id_mst_bisnis;
             $row['data']['nama_kategori'] = $key->nama_kategori;
             //cek data di mst_produk
-            $a = $this->crud->count_where('mst_produk', ['id_mst_kategori' => $key->id]);
+            $a = $this->crud->count_where('mst_produk_cabang', ['id_mst_kategori' => $key->id_mst_kategori]);
 
             $row['data']['jumlah_produk'] = $a;
             $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
@@ -478,6 +478,54 @@ class Produk extends CI_Controller
         );
 
         $r = $this->crud->get_where('mst_kategori_cabang', $data_double)->row_array();
+
+        if ($r) {
+            $response = ['status' => 'double', 'message' => 'Gagal Tambah Data!'];
+            echo json_encode($response);
+            die;
+        } else {
+            $insert_data = $this->crud->insert($table, $data);
+        }
+
+
+
+        if ($insert_data > 0) {
+
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function insert_data_produk_cabang()
+    {
+        $data = $this->input->post();
+        $table = $this->input->post("table");
+        unset($data['table']);
+
+        $a = $this->crud->get_where('mst_produk', ['id' => $data['id']])->row_array();
+
+        $data['nama_produk'] = $a['nama_produk'];
+        $data['id_mst_kategori'] = $a['id_mst_kategori'];
+        $data['gambar'] = $a['gambar'];
+        $data['harga'] = $a['harga'];
+        $data['sku'] = $a['sku'];
+        $data['kelola_stok'] = 'TIDAK';
+
+        // echo '<pre>';
+        // var_dump($data);
+        // echo '</pre>';
+        // die;
+
+
+        //cek dulu apakah ada double
+        $data_double = array(
+            'sku' => $a['sku'],
+            'id_mst_outlet' => $data['id_mst_outlet']
+        );
+
+        $r = $this->crud->get_where('mst_produk_cabang', $data_double)->row_array();
 
         if ($r) {
             $response = ['status' => 'double', 'message' => 'Gagal Tambah Data!'];

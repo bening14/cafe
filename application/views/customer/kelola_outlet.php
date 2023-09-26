@@ -171,7 +171,7 @@
                                             <div class="card-datatable table-responsive">
                                                 <div class="card-header border-bottom" style="text-align: right;">
                                                     <div>
-                                                        <button class="btn btn-sm btn-info" onclick="tambahk()"><i class="ti ti-category-2"></i> Tambah</button>
+                                                        <button class="btn btn-sm btn-info" onclick="tambahp()"><i class="ti ti-category-2"></i> Tambah</button>
                                                     </div>
                                                 </div>
                                                 <table id="table-produk" class="table">
@@ -198,7 +198,7 @@
                                                 </span>
                                                 <div class="d-flex flex-column ps-1">
                                                     <h5 class="alert-heading mb-2">Catatan</h5>
-                                                    <p class="mb-0">Tambahkan produk untuk outlet Anda<br>Produk yang Anda atur kelola stok, akan muncul pada pengaturan Inventory Produk</p>
+                                                    <p class="mb-0">Pajak & Layanan yang Anda tambahkan akan muncul pada struk sebagai beban biaya yang harus dibayarkan oleh Customer Anda</p>
                                                     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> -->
                                                     </button>
                                                 </div>
@@ -225,59 +225,35 @@
                                         </div>
 
                                         <div class="tab-pane fade" id="navs-justified-link-meja" role="tabpanel">
-                                            <ul class="timeline timeline-advance mb-2 pb-1">
-                                                <li class="timeline-item ps-4 border-left-dashed">
-                                                    <span class="timeline-indicator timeline-indicator-success">
-                                                        <i class="ti ti-circle-check"></i>
-                                                    </span>
-                                                    <div class="timeline-event ps-0 pb-0">
-                                                        <div class="timeline-header">
-                                                            <small class="text-success text-uppercase fw-medium">sender</small>
-                                                        </div>
-                                                        <h6 class="mb-0">Veronica Herman</h6>
-                                                        <p class="text-muted mb-0 text-nowrap">101 Boulder, California(CA), 95959</p>
+                                            <div class="alert alert-dark alert-dismissible d-flex align-items-baseline" role="alert">
+                                                <span class="alert-icon alert-icon-lg text-dark me-2">
+                                                    <i class="ti ti-bookmark ti-sm"></i>
+                                                </span>
+                                                <div class="d-flex flex-column ps-1">
+                                                    <h5 class="alert-heading mb-2">Catatan</h5>
+                                                    <p class="mb-0">Tambahkan meja untuk Outlet Anda, Informasi pesanan juga akan dibuat berdasarkan nama meja</p>
+                                                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> -->
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-datatable table-responsive">
+                                                <div class="card-header border-bottom" style="text-align: right;">
+                                                    <div>
+                                                        <button class="btn btn-sm btn-info" onclick="tambahm()"><i class="ti ti-category-2"></i> Tambah</button>
                                                     </div>
-                                                </li>
-                                                <li class="timeline-item ps-4 border-transparent">
-                                                    <span class="timeline-indicator timeline-indicator-primary">
-                                                        <i class="ti ti-map-pin"></i>
-                                                    </span>
-                                                    <div class="timeline-event ps-0 pb-0">
-                                                        <div class="timeline-header">
-                                                            <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                                        </div>
-                                                        <h6 class="mb-0">Barry Schowalter</h6>
-                                                        <p class="text-muted mb-0 text-nowrap">939 Orange, California(CA),92118</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="border-bottom border-bottom-dashed mt-0 mb-4"></div>
-                                            <ul class="timeline timeline-advance mb-0">
-                                                <li class="timeline-item ps-4 border-left-dashed">
-                                                    <span class="timeline-indicator timeline-indicator-success">
-                                                        <i class="ti ti-circle-check"></i>
-                                                    </span>
-                                                    <div class="timeline-event ps-0 pb-0">
-                                                        <div class="timeline-header">
-                                                            <small class="text-success text-uppercase fw-medium">sender</small>
-                                                        </div>
-                                                        <h6 class="mb-0">Myrtle Ullrich</h6>
-                                                        <p class="text-muted mb-0 text-nowrap">162 Windsor, California(CA), 95492</p>
-                                                    </div>
-                                                </li>
-                                                <li class="timeline-item ps-4 border-transparent">
-                                                    <span class="timeline-indicator timeline-indicator-primary">
-                                                        <i class="ti ti-map-pin"></i>
-                                                    </span>
-                                                    <div class="timeline-event ps-0 pb-0">
-                                                        <div class="timeline-header">
-                                                            <small class="text-primary text-uppercase fw-medium">Receiver</small>
-                                                        </div>
-                                                        <h6 class="mb-0">Helen Jacobs</h6>
-                                                        <p class="text-muted mb-0 text-nowrap">487 Sunset, California(CA), 94043</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                </div>
+                                                <table id="table-meja" class="table">
+                                                    <thead class="border-top">
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama Meja</th>
+                                                            <th>Kapasitas</th>
+                                                            <th>Status</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -347,6 +323,45 @@
     </div>
     <!--/ Tambah kategori Modal -->
 
+    <!-- Tambah produk Modal -->
+    <div class="modal fade" id="tambahproduk" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <h3 class="mb-2">Tambah Produk</h3>
+                    </div>
+                    <form id="form-data-produk" method="post" class="row g-3">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="produk">Nama Produk</label>
+                            <select name="produk" id="produk" class="form-control">
+                                <?php
+                                foreach ($produk as $key => $value) {
+                                ?>
+                                    <option value="<?= $value['id'] ?>"><?= $value['nama_produk'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-12" style="text-align: right">
+                            <a href="<?= base_url('produk') ?>">Pilihan tidak ada ? Daftarkan Produk <i class="ti ti-arrow-narrow-right"></i></a>
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
+                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Tambah produk Modal -->
+
     <!-- Tambah Pajak Modal -->
     <div class="modal fade" id="tambahpajak" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
@@ -396,6 +411,88 @@
         </div>
     </div>
     <!--/ Tambah Pajak Modal -->
+
+    <!-- Tambah Meja Modal -->
+    <div class="modal fade" id="tambahmeja" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <h3 class="mb-2">Tambah Meja</h3>
+                    </div>
+                    <form id="form-data-meja" class="row g-3">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="nama_meja">Nama Meja</label>
+                            <input type="text" id="nama_meja" name="nama_meja" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="kapasitas">Kapasitas</label>
+                            <input type="text" id="kapasitas" name="kapasitas" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="status_meja">Status Meja</label>
+                            <select name="status_meja" id="status_meja" class="form-control">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
+                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Tambah Meja Modal -->
+
+    <!-- Edit meja Modal -->
+    <div class="modal fade" id="editmeja" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <h3 class="mb-2">Edit Meja</h3>
+                    </div>
+                    <form id="form-data-edit-meja" class="row g-3">
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="nama_meja_e">Nama Meja</label>
+                            <input type="text" id="nama_meja_e" name="nama_meja_e" class="form-control" placeholder="Misal : Meja 1" />
+                            <input type="hidden" id="id_e" name="id_e" class="form-control" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="kapasitas_e">Kapasitas</label>
+                            <input type="text" id="kapasitas_e" name="kapasitas_e" class="form-control" placeholder="Misal : 4" />
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="status_meja_e">Status Meja</label>
+                            <select name="status_meja_e" id="status_meja_e" class="form-control">
+                                <option value="Aktif">Aktif</option>
+                                <option value="Tidak Aktif">Tidak Aktif</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Ubah</button>
+                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Tambah meja Modal -->
 
 
 
@@ -628,8 +725,8 @@
                     "data": "data",
                     "render": function(data) {
                         return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama_biaya + `','` + data.jenis + `','` + data.satuan + `','` + data.jumlah + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
-                                    <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
+                                    
+                                    <a href="javascript:;" class="text-body delete-record" onclick="delete_data_pajak('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
                                     
                                 </div>`
                     }
@@ -654,6 +751,65 @@
             }
         })
 
+        //table meja
+        $("#table-meja").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            'serverSide': true,
+            'processing': true,
+            "order": [
+                [0, "desc"]
+            ],
+            'ajax': {
+                'dataType': 'json',
+                'url': '<?= base_url() ?>customer/ajax_table_meja',
+                'type': 'post',
+                'data': {
+                    id: '<?= $id ?>'
+                }
+            },
+            'columns': [{
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.no",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.nama_meja"
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data.kapasitas",
+                }, {
+                    "target": [<?= $target ?>],
+                    "className": 'text-center py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        if (data.status_meja == 'Aktif') {
+                            return `<button type="button" class="btn rounded-pill btn-label-success btn-sm waves-effect">Aktif</button>`
+                        } else {
+                            return `<button type="button" class="btn rounded-pill btn-label-danger btn-sm waves-effect">Tidak Aktif</button>`
+                        }
+                    }
+                },
+                {
+                    "target": [<?= $target ?>],
+                    "className": 'py-1',
+                    "data": "data",
+                    "render": function(data) {
+                        return `<div class="d-flex align-items-center">
+                                    <a href="javascript:;" class="text-body" onclick="editm('` + data.id + `', '` + data.nama_meja + `','` + data.kapasitas + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
+                                    <a href="javascript:;" class="text-body delete-record" onclick="delete_data_meja('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
+                                    
+                                </div>`
+                    }
+                }
+            ],
+            "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+
     });
 
     function reload_table_kategori() {
@@ -666,6 +822,10 @@
 
     function reload_table_pajak() {
         $('#table-pajak').DataTable().ajax.reload(null, false);
+    }
+
+    function reload_table_meja() {
+        $('#table-meja').DataTable().ajax.reload(null, false);
     }
 
     $("#form-data-kategori").submit(function(e) {
@@ -728,6 +888,66 @@
         })
     })
 
+    $("#form-data-produk").submit(function(e) {
+        e.preventDefault()
+
+        var form_data = new FormData();
+        form_data.append('table', 'mst_produk_cabang');
+        form_data.append('id', $("#produk").val());
+        form_data.append('id_mst_outlet', '<?= $id ?>');
+        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
+
+        var url_ajax = '<?= base_url() ?>produk/insert_data_produk_cabang'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    $('#tambahproduk').modal('hide');
+                    reload_table_produk()
+
+                } else if (result.status == "double") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Produk yang Anda tambahkan sudah tersedia',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal tambah data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
+
     $("#form-data-pajak").submit(function(e) {
         e.preventDefault()
 
@@ -750,8 +970,143 @@
                 if (result.status == "success") {
                     $('#tambahpajak').modal('hide');
                     reload_table_pajak()
-                    location.reload();
+                    // location.reload();
 
+                } else if (result.status == "double") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Pajak & Layanan yang Anda tambahkan sudah tersedia',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal tambah data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
+
+    $("#form-data-meja").submit(function(e) {
+        e.preventDefault()
+
+        var form_data = new FormData();
+        form_data.append('table', 'tbl_meja');
+        form_data.append('nama_meja', $("#nama_meja").val());
+        form_data.append('kapasitas', $("#kapasitas").val());
+        form_data.append('status_meja', $("#status_meja").val());
+        form_data.append('id_mst_outlet', '<?= $id ?>');
+        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
+
+        var url_ajax = '<?= base_url() ?>customer/insert_data_meja'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    $('#tambahmeja').modal('hide');
+                    reload_table_meja()
+
+                } else if (result.status == "double") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Meja yang Anda tambahkan sudah tersedia',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Gagal tambah data',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
+                }
+            },
+            error: function(err) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Telah terjadi kesalahan, silahkan contact CS',
+                    customClass: {
+                        confirmButton: 'btn btn-primary'
+                    },
+                    buttonsStyling: false
+                })
+            }
+        })
+    })
+
+    $("#form-data-edit-meja").submit(function(e) {
+        e.preventDefault()
+
+        var form_data = new FormData();
+        form_data.append('table', 'tbl_meja');
+        form_data.append('id', $("#id_e").val());
+        form_data.append('nama_meja', $("#nama_meja_e").val());
+        form_data.append('kapasitas', $("#kapasitas_e").val());
+        form_data.append('status_meja', $("#status_meja_e").val());
+        form_data.append('id_mst_outlet', '<?= $id ?>');
+        form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
+
+        var url_ajax = '<?= base_url() ?>customer/edit_data_meja'
+
+        $.ajax({
+            url: url_ajax,
+            type: "post",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            dataType: "json",
+            success: function(result) {
+                if (result.status == "success") {
+                    $('#editmeja').modal('hide');
+                    reload_table_meja()
+
+                } else if (result.status == "double") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Meja yang Anda tambahkan sudah tersedia',
+                        customClass: {
+                            confirmButton: 'btn btn-primary'
+                        },
+                        buttonsStyling: false
+                    })
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -790,6 +1145,18 @@
         $('#id_mst_bisnis').val(id)
     }
 
+    function tambahp(id) {
+        $('#tambahproduk').modal('show')
+
+        $('#id_mst_bisnis').val(id)
+    }
+
+    function tambahm(id) {
+        $('#tambahmeja').modal('show')
+
+        $('#id_mst_bisnis').val(id)
+    }
+
     function delete_data_kategori(id) {
         Swal.fire({
             title: 'Apakah Anda Yakin ?',
@@ -818,6 +1185,96 @@
                         success: function(result) {
                             if (result.status == "success") {
                                 reload_table_kategori()
+                            } else
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Gagal hapus data',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary'
+                                    },
+                                    buttonsStyling: false
+                                })
+                        }
+                    })
+                }
+            }
+        });
+    }
+
+    function delete_data_meja(id) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin ?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!',
+            customClass: {
+                confirmButton: 'btn btn-primary me-1',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function(result) {
+            if (result.value) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?= base_url() ?>produk/delete_data',
+                        data: {
+                            id: id,
+                            table: "tbl_meja"
+                        },
+                        type: 'post',
+                        dataType: 'json',
+                        success: function(result) {
+                            if (result.status == "success") {
+                                reload_table_meja()
+                            } else
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Gagal hapus data',
+                                    customClass: {
+                                        confirmButton: 'btn btn-primary'
+                                    },
+                                    buttonsStyling: false
+                                })
+                        }
+                    })
+                }
+            }
+        });
+    }
+
+    function delete_data_pajak(id) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin ?',
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!',
+            customClass: {
+                confirmButton: 'btn btn-primary me-1',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function(result) {
+            if (result.value) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '<?= base_url() ?>produk/delete_data',
+                        data: {
+                            id: id,
+                            table: "tbl_pajak_layanan_cabang"
+                        },
+                        type: 'post',
+                        dataType: 'json',
+                        success: function(result) {
+                            if (result.status == "success") {
+                                reload_table_pajak()
                             } else
                                 Swal.fire({
                                     icon: 'error',
@@ -973,5 +1430,13 @@
                 $('#satuan').val(result.satuan)
             }
         })
+    }
+
+    function editm(id, nama, kapasitas) {
+        $('#editmeja').modal('show')
+
+        $('#id_e').val(id)
+        $('#nama_meja_e').val(nama)
+        $('#kapasitas_e').val(kapasitas)
     }
 </script>
