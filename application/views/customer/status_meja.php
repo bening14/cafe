@@ -96,10 +96,14 @@
                                         <div class="card-body pb-4 pt-1">
                                             <div class="col-12 col-md-12">
                                                 <label class="form-label" for="outlet">Pilih Outlet</label>
-                                                <select name="outlet" id="outlet" class="form-control">
-                                                    <option value="Outlet">Cabang Malang</option>
-                                                    <option value="Outlet">Cabang Surabaya</option>
-                                                    <option value="Outlet">Cabang Bojonegoro</option>
+                                                <select name="outlet" id="outlet" class="form-control" onchange="showdata()">
+                                                    <?php
+                                                    foreach ($outlet as $key => $value) {
+                                                    ?>
+                                                        <option value="<?= $value['id'] ?>"><?= $value['nama_outlet'] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -109,8 +113,8 @@
                         </div>
                         <!-- Users List Table -->
                         <div class="col-md-12 col-xl-12 col-xl-12 mb-4">
-                            <div class="row">
-                                <div class="col-md-3 col-xl-3 mb-3">
+                            <div class="row" id="status_meja">
+                                <!-- <div class="col-md-3 col-xl-3 mb-3">
                                     <div class="card h-100 text-bg-info">
                                         <div class="card-header d-flex justify-content-between pb-2 mb-1">
                                             <div class="card-title mb-1">
@@ -187,7 +191,7 @@
                                             <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -215,111 +219,6 @@
         <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
-
-    <!-- Tambah Pelanggan Modal -->
-    <div class="modal fade" id="tambahpelanggan" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered modal-lg">
-            <div class="modal-content p-3 p-md-5">
-                <div class="modal-body">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="text-center mb-4">
-                        <h3 class="mb-2">Tambah Pelanggan</h3>
-                    </div>
-                    <form id="form-data" class="row g-3">
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama">Nama Lengkap</label>
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Misal : Budi Waluyo" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="telephone">Telephone</label>
-                            <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Contoh : 0817-9090-7856" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Contoh : budi@gmail.com" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="alamat">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" class="form-control" placeholder="Contoh : Jl. Perusahaan Gg.5 Surabaya" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="catatan">Catatan</label>
-                            <input type="text" id="catatan" name="catatan" class="form-control" />
-                        </div>
-
-
-                        <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Tambah</button>
-                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ Tambah Pelanggan Modal -->
-
-    <!-- edit pelanggan Modal -->
-    <div class="modal fade" id="editpelanggan" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-simple modal-edit-user modal-dialog-centered modal-lg">
-            <div class="modal-content p-3 p-md-5">
-                <div class="modal-body">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="text-center mb-4">
-                        <h3 class="mb-2">Edit Pelanggan</h3>
-                    </div>
-                    <form id="form-data-edit" class="row g-3">
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="nama_e">Nama Lengkap</label>
-                            <input type="text" id="nama_e" name="nama_e" class="form-control" placeholder="Misal : Budi Waluyo" />
-                            <input type="hidden" id="id_e" name="id_e" class="form-control" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="jenis_kelamin_e">Jenis Kelamin</label>
-                            <select name="jenis_kelamin_e" id="jenis_kelamin_e" class="form-control">
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="telephone_e">Telephone</label>
-                            <input type="text" id="telephone_e" name="telephone_e" class="form-control" placeholder="Contoh : 0817-9090-7856" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="email_e">Email</label>
-                            <input type="text" id="email_e" name="email_e" class="form-control" placeholder="Contoh : budi@gmail.com" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="alamat_e">Alamat</label>
-                            <input type="text" id="alamat_e" name="alamat_e" class="form-control" placeholder="Contoh : Jl. Perusahaan Gg.5 Surabaya" />
-                        </div>
-                        <div class="col-12 col-md-12">
-                            <label class="form-label" for="catatan_e">Catatan</label>
-                            <input type="text" id="catatan_e" name="catatan_e" class="form-control" />
-                        </div>
-
-
-                        <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Ubah</button>
-                            <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ edit pelanggan Modal -->
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -358,304 +257,98 @@
 
 <script>
     <?php $target = 0; ?>
+    var a = ''
     $(function() {
-        $("#table-pelanggan").DataTable({
-            "responsive": true,
-            "lengthChange": true,
-            "autoWidth": false,
-            'serverSide': true,
-            'processing': true,
-            "order": [
-                [0, "desc"]
-            ],
-            'ajax': {
-                'dataType': 'json',
-                'url': '<?= base_url() ?>customer/ajax_table_pelanggan',
-                'type': 'post'
+        $.ajax({
+            url: '<?= base_url() ?>customer/getmeja',
+            data: {
+                id: $('#outlet').val(),
+                table: "tbl_meja"
             },
-            'columns': [{
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.no",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-left py-1',
-                    "data": "data",
-                    "render": function(data) {
-                        return `<h5 class="mb-0">` + data.nama + `</h5><span>` + data.kode_pelanggan + `</span>`
-                    }
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.jenis_kelamin",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.telephone",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.email",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.alamat",
-                }, {
-                    "target": [<?= $target ?>],
-                    "className": 'text-center py-1',
-                    "data": "data.catatan",
-                },
-                {
-                    "target": [<?= $target ?>],
-                    "className": 'py-1',
-                    "data": "data",
-                    "render": function(data) {
-                        return `<div class="d-flex align-items-center">
-                                    <a href="javascript:;" class="text-body" onclick="edito('` + data.id + `','` + data.nama + `','` + data.telephone + `','` + data.email + `','` + data.alamat + `','` + data.catatan + `')"><i class="ti ti-edit ti-sm me-2"></i></a>
-                                    <a href="javascript:;" class="text-body delete-record" onclick="delete_data('` + data.id + `')"><i class="ti ti-trash ti-sm mx-2"></i></a>
-                                    
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                result.forEach(d => {
+                    if (d.kondisi == 'Kosong') {
+                        a += `<div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-danger">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">` + d.nama_meja + `</h4>
+                                                <h4 class="pt-3 text-white">` + d.kondisi + `</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Lihat</button>
+                                        </div>
+                                    </div>
+                                </div>`
+                    } else {
+                        a += `<div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-info">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">` + d.nama_meja + `</h4>
+                                                <h4 class="pt-3 text-white">` + d.kondisi + `</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
+                                        </div>
+                                    </div>
                                 </div>`
                     }
-                }
-            ],
-            "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        });
+                });
+                $('#status_meja').html(a)
+            }
+        })
 
     });
 
-    function reload_table() {
-        $('#table-pelanggan').DataTable().ajax.reload(null, false);
-    }
-
-    $("#form-data").submit(function(e) {
-        e.preventDefault()
-
-        if ($('#nama').val() == '' || $('#jenis_kelamin').val() == '' || $('#telephone').val() == '' || $('#email').val() == '' || $('#alamat').val() == '' || $('#catatan').val() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Tidak boleh ada kolom kosong!',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false
-            })
-            return
-        }
-
-        var form_data = new FormData();
-        form_data.append('table', 'tbl_pelanggan');
-        form_data.append('nama', $("#nama").val());
-        form_data.append('jenis_kelamin', $("#jenis_kelamin").val());
-        form_data.append('telephone', $("#telephone").val());
-        form_data.append('email', $("#email").val());
-        form_data.append('alamat', $("#alamat").val());
-        form_data.append('catatan', $("#catatan").val());
-        form_data.append('kategori', 'tambah');
-
-        var url_ajax = '<?= base_url() ?>customer/insert_data_pelanggan'
-
+    function showdata() {
+        var a = ''
         $.ajax({
-            url: url_ajax,
-            type: "post",
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            dataType: "json",
-            success: function(result) {
-                if (result.status == "success") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'berhasil tambah data',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                    $('#nama').val('')
-                    $('#telephone').val('')
-                    $('#email').val('')
-                    $('#alamat').val('')
-                    $('#catatan').val('')
-                    $('#tambahpelanggan').modal('hide');
-                    reload_table()
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Gagal tambah data',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                }
+            url: '<?= base_url() ?>customer/getmeja',
+            data: {
+                id: $('#outlet').val(),
+                table: "tbl_meja"
             },
-            error: function(err) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Telah terjadi kesalahan, silahkan contact CS',
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                })
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                result.forEach(d => {
+                    if (d.kondisi == 'Kosong') {
+                        a += `<div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-danger">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">` + d.nama_meja + `</h4>
+                                                <h4 class="pt-3 text-white">` + d.kondisi + `</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Lihat</button>
+                                        </div>
+                                    </div>
+                                </div>`
+                    } else {
+                        a += `<div class="col-md-3 col-xl-3 mb-3">
+                                    <div class="card h-100 text-bg-info">
+                                        <div class="card-header d-flex justify-content-between pb-2 mb-1">
+                                            <div class="card-title mb-1">
+                                                <h4 class="m-0 me-2 text-white">` + d.nama_meja + `</h4>
+                                                <h4 class="pt-3 text-white">` + d.kondisi + `</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <button type="button" class="btn btn-dark waves-effect waves-light"><i class="ti ti-notes"></i>&nbsp;&nbsp;Cetak QR Menu</button>
+                                        </div>
+                                    </div>
+                                </div>`
+                    }
+                });
+                $('#status_meja').html(a)
             }
         })
-    })
-
-
-    function tambaho() {
-        $('#tambahpelanggan').modal('show')
     }
-
-    function delete_data(id) {
-        Swal.fire({
-            title: 'Apakah Anda Yakin ?',
-            text: "Data yang dihapus tidak dapat dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus saja!',
-            customClass: {
-                confirmButton: 'btn btn-primary me-1',
-                cancelButton: 'btn btn-label-secondary'
-            },
-            buttonsStyling: false
-        }).then(function(result) {
-            if (result.value) {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: '<?= base_url() ?>customer/delete_data',
-                        data: {
-                            id: id,
-                            table: "tbl_pelanggan"
-                        },
-                        type: 'post',
-                        dataType: 'json',
-                        success: function(result) {
-                            if (result.status == "success") {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Terhapus!',
-                                    text: 'Data berhasil dihapus',
-                                    customClass: {
-                                        confirmButton: 'btn btn-success'
-                                    }
-                                });
-                                reload_table()
-                            } else
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Gagal hapus data',
-                                    customClass: {
-                                        confirmButton: 'btn btn-primary'
-                                    },
-                                    buttonsStyling: false
-                                })
-                        }
-                    })
-                }
-            }
-        });
-    }
-
-    function edito(id, nama, telephone, email, alamat, catatan) {
-        $('#editpelanggan').modal('show')
-
-        $('#id_e').val(id)
-        $('#nama_e').val(nama)
-        $('#telephone_e').val(telephone)
-        $('#email_e').val(email)
-        $('#alamat_e').val(alamat)
-        $('#catatan_e').val(catatan)
-    }
-
-    $("#form-data-edit").submit(function(e) {
-        e.preventDefault()
-
-        if ($('#nama_e').val() == '' || $('#telephone_e').val() == '' || $('#email_e').val() == '' || $('#alamat_e').val() == '' || $('#catatan_e').val() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Tidak boleh ada kolom kosong!',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false
-            })
-            return
-        }
-
-        var form_data = new FormData();
-        form_data.append('table', 'tbl_pelanggan');
-        form_data.append('id', $("#id_e").val());
-        form_data.append('nama', $("#nama_e").val());
-        form_data.append('jenis_kelamin', $("#jenis_kelamin_e").val());
-        form_data.append('telephone', $("#telephone_e").val());
-        form_data.append('email', $("#email_e").val());
-        form_data.append('alamat', $("#alamat_e").val());
-        form_data.append('catatan', $("#catatan_e").val());
-        form_data.append('kategori', 'edit');
-
-        var url_ajax = '<?= base_url() ?>customer/insert_data_pelanggan'
-
-        $.ajax({
-            url: url_ajax,
-            type: "post",
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            dataType: "json",
-            success: function(result) {
-                if (result.status == "success") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'berhasil ubah data',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                    $('#editpelanggan').modal('hide');
-                    reload_table()
-
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Gagal ubah data',
-                        customClass: {
-                            confirmButton: 'btn btn-primary'
-                        },
-                        buttonsStyling: false
-                    })
-                }
-            },
-            error: function(err) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Telah terjadi kesalahan, silahkan contact CS',
-                    customClass: {
-                        confirmButton: 'btn btn-primary'
-                    },
-                    buttonsStyling: false
-                })
-            }
-        })
-    })
 </script>

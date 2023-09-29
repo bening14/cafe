@@ -1016,6 +1016,7 @@
         form_data.append('nama_meja', $("#nama_meja").val());
         form_data.append('kapasitas', $("#kapasitas").val());
         form_data.append('status_meja', $("#status_meja").val());
+        form_data.append('kondisi', 'Kosong');
         form_data.append('id_mst_outlet', '<?= $id ?>');
         form_data.append('id_mst_bisnis', '<?= $id_mst_bisnis ?>');
 

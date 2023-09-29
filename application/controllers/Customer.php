@@ -821,7 +821,23 @@ class Customer extends CI_Controller
 
     public function status_meja()
     {
-        $this->load->view('customer/status_meja');
+        $r = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+        $data['id_mst_bisnis'] = $r['id'];
+        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $r['id']])->result_array();
+        // echo $this->db->last_query();
+        // die;
+
+        $this->load->view('customer/status_meja', $data);
+    }
+
+    public function getmeja()
+    {
+        $table = $this->input->post("table");
+        $id = $this->input->post("id");
+
+        $result =  $this->crud->get_where_meja($table, ['id_mst_outlet' => $id])->result_array();
+
+        echo json_encode($result);
     }
 
     public function manajer()

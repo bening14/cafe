@@ -2,6 +2,18 @@
 
 class Crud extends CI_Model
 {
+    public function get_where_meja($table, $where)
+    {
+        $this->db->order_by("nama_meja", "ASC");
+        return $this->db->get_where($table, $where);
+    }
+
+    public function get_where_stok($table, $where)
+    {
+        $this->db->order_by("sku", "ASC");
+        return $this->db->get_where($table, $where);
+    }
+
     public function get_where($table, $where)
     {
         $this->db->order_by("id", "DESC");
@@ -20,6 +32,20 @@ class Crud extends CI_Model
     {
         $this->db->select($select);
         $this->db->order_by("id", "DESC");
+        return $this->db->get_where($table, $where);
+    }
+
+    public function get_where_select_stok_akhir($table, $select, $where)
+    {
+        $this->db->select($select);
+        $this->db->order_by("tanggal_pengakuan", "DESC");
+        return $this->db->get_where($table, $where);
+    }
+
+    public function get_where_select_stok_awal($table, $select, $where)
+    {
+        $this->db->select($select);
+        $this->db->order_by("tanggal_pengakuan", "ASC");
         return $this->db->get_where($table, $where);
     }
 

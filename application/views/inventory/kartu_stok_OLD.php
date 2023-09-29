@@ -89,11 +89,12 @@
 
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Users List Table -->
                         <div class="card">
                             <div class="card-header">
                                 <h5>Kartu Stok</h5>
                                 <div class="row">
-                                    <div class="col-2 col-md-2">
+                                    <div class="col-3 col-md-3">
                                         <label class="form-label" for="outlet">Outlet</label>
                                         <select name="outlet" id="outlet" class="form-control">
                                             <?php
@@ -105,7 +106,7 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="col-2 col-md-2">
+                                    <div class="col-3 col-md-3">
                                         <label class="form-label" for="kategori">Kategori</label>
                                         <select name="kategori" id="kategori" class="form-control">
                                             <option value="SEMUA">SEMUA</option>
@@ -126,23 +127,18 @@
                                         <label class="form-label" for="sampai_tanggal">Sampai Tanggal</label>
                                         <input type="date" id="sampai_tanggal" name="sampai_tanggal" class="form-control" />
                                     </div>
-                                    <div class="col-4 col-md-4">
+                                    <div class="col-2 col-md-2">
                                         <!-- <button type="button" class="btn btn-info waves-effect waves-light mt-4" onclick="cari()"><i class="ti ti-search"></i> Cari</button> -->
-                                        <button class="btn btn-info waves-effect waves-light mt-4" onclick="terapkanfilter()"> Terapkan</button>
-                                        <a class="btn btn-success waves-effect waves-light mt-4 text-white" id="btn_download_excel"><i class="ti ti-file-spreadsheet"></i> Export Excel</a>
+                                        <a class="btn btn-success waves-effect waves-light mt-4 text-white" id="btn_download_excel"><i class="ti ti-file-spreadsheet"></i> Expor</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div class="card mt-3">
-
                             <div class="card-datatable table-responsive">
                                 <table id="table-kartu-stok" class="table">
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
+                                            <th>Outlet</th>
                                             <th>Nama Produk</th>
                                             <th>Kategori</th>
                                             <th>Stok Awal</th>
@@ -153,6 +149,20 @@
                                             <th>Penyesuaian</th>
                                             <th>Stok Akhir</th>
                                             <th>Satuan</th>
+                                        </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th><input type="text" class="form-control search-cepat" id="search_outlet" name="search_outlet" placeholder="Cari Outlet"></th>
+                                            <th><input type="text" class="form-control search-cepat" id="search_nama_produk" name="search_nama_produk" placeholder="Cari Produk"></th>
+                                            <th><input type="text" class="form-control search-cepat" id="search_nama_kategori" name="search_nama_kategori" placeholder="Cari Kategori"></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -217,39 +227,15 @@
 
 <script>
     <?php $target = 0; ?>
-
-    $('#btn_download_excel').on('click', function() {
-
-        if ($('#outlet').val() == '' || $('#kategori').val() == '' || $('#dari_tanggal').val() == '' || $('#sampai_tanggal').val() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Tidak boleh ada kolom kosong!',
-                customClass: {
-                    confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false
-            })
-            return
-        }
-
-        var outlet = $("#outlet").val();
-        var kategori = $("#kategori").val();
-        var dari_tanggal = $("#dari_tanggal").val();
-        var sampai_tanggal = $("#sampai_tanggal").val();
-
-        $("#btn_download_excel").attr("href", "<?= base_url('inventory/generatedata') ?>?outlet=" + outlet + "&kategori=" + kategori + "&dari_tanggal=" + dari_tanggal + "&sampai_tanggal=" + sampai_tanggal)
-    });
-
-    function terapkanfilter() {
+    $(function() {
         $("#table-kartu-stok").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
             'serverSide': true,
             'processing': true,
-            'searching': true,
-            "bDestroy": true,
+            'searching': false,
+            'retrieve': true,
             "order": [
                 [0, "desc"]
             ],
@@ -258,16 +244,26 @@
                 'url': '<?= base_url() ?>inventory/ajax_table_kartu_stok',
                 'type': 'post',
                 'data': {
-                    outlet: $('#outlet').val(),
-                    kategori: $('#kategori').val(),
-                    dari_tanggal: $('#dari_tanggal').val(),
-                    sampai_tanggal: $('#sampai_tanggal').val()
+                    search_outlet: function() {
+                        return $('#search_outlet').val()
+                    },
+                    search_nama_produk: function() {
+                        return $('#search_nama_produk').val()
+                    },
+
+                    search_nama_kategori: function() {
+                        return $('#search_nama_kategori').val()
+                    },
                 }
             },
             'columns': [{
                 "target": [<?= $target ?>],
                 "className": 'text-center py-1',
                 "data": "data.no",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.nama_outlet",
             }, {
                 "target": [<?= $target ?>],
                 "className": 'text-left py-1',
@@ -315,5 +311,34 @@
             "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         });
+
+
+    });
+
+    function reload_table() {
+        $('#table-kartu-stok').DataTable().ajax.reload(null, false);
     }
+
+    $('#btn_download_excel').on('click', function() {
+
+        if ($('#outlet').val() == '' || $('#kategori').val() == '' || $('#dari_tanggal').val() == '' || $('#sampai_tanggal').val() == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tidak boleh ada kolom kosong!',
+                customClass: {
+                    confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false
+            })
+            return
+        }
+
+        var outlet = $("#outlet").val();
+        var kategori = $("#kategori").val();
+        var dari_tanggal = $("#dari_tanggal").val();
+        var sampai_tanggal = $("#sampai_tanggal").val();
+
+        $("#btn_download_excel").attr("href", "<?= base_url('inventory/generatedata') ?>?outlet=" + outlet + "&kategori=" + kategori + "&dari_tanggal=" + dari_tanggal + "&sampai_tanggal=" + sampai_tanggal)
+    });
 </script>

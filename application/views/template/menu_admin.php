@@ -57,33 +57,30 @@
 
         <!-- Produk -->
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Produk</span>
+            <span class="menu-header-text">Master</span>
         </li>
 
-        <!-- Layouts -->
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="<?= base_url('produk/kategori') ?>" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-category-2"></i>
+                <div data-i18n="Kategori">Kategori</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="<?= base_url('produk') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-salad"></i>
                 <div data-i18n="Produk">Produk</div>
             </a>
+        </li>
+        <li class="menu-item">
+            <a href="<?= base_url('customer/pajak') ?>" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-receipt-tax"></i>
+                <div data-i18n="Pajak & Layanan">Pajak & Layanan</div>
+            </a>
+        </li>
 
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="<?= base_url('produk/kategori') ?>" class="menu-link">
-                        <div data-i18n="Kategori">Kategori</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<?= base_url('produk') ?>" class="menu-link">
-                        <div data-i18n="Menu">Menu</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Meja">Meja</div>
-                    </a>
-                </li>
-            </ul>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Purchase & Inventory</span>
         </li>
 
         <!-- Inventory -->
@@ -99,22 +96,22 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('inventory/masuk') ?>" class="menu-link">
                         <div data-i18n="Stok Masuk">Stok Masuk</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('inventory/keluar') ?>" class="menu-link">
                         <div data-i18n="Stok Keluar">Stok Keluar</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('inventory/transfer') ?>" class="menu-link">
                         <div data-i18n="Transfer Stok">Transfer Stok</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('inventory/sto') ?>" class="menu-link">
                         <div data-i18n="Stok Opname">Stok Opname</div>
                     </a>
                 </li>
@@ -156,27 +153,10 @@
             <span class="menu-header-text">Bisnis</span>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="<?= base_url('customer/bisnis') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building-store"></i>
-                <div data-i18n="Bisnis"></div>
+                <div data-i18n="Outlet">Outlet</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="<?= base_url('customer/bisnis') ?>" class="menu-link">
-                        <div data-i18n="Outlet">Outlet</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<?= base_url('customer/pajak') ?>" class="menu-link">
-                        <div data-i18n="Pajak & Layanan">Pajak & Layanan</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="<?= base_url('customer/struk') ?>" class="menu-link">
-                        <div data-i18n="Struk & QR">Struk & QR</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class="menu-item">
             <a href="<?= base_url('customer/pelanggan') ?>" class="menu-link">
@@ -190,12 +170,6 @@
                 <div data-i18n="Promo">Promo</div>
             </a>
         </li>
-        <!-- <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-moneybag"></i>
-                <div data-i18n="Komisi">Komisi</div>
-            </a>
-        </li> -->
         <li class="menu-item">
             <a href="<?= base_url('customer/status_meja') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-soup"></i>

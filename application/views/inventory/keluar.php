@@ -91,7 +91,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Kartu Stok</h5>
+                                <h5>Stok Keluar</h5>
                                 <div class="row">
                                     <div class="col-2 col-md-2">
                                         <label class="form-label" for="outlet">Outlet</label>
@@ -139,20 +139,15 @@
                         <div class="card mt-3">
 
                             <div class="card-datatable table-responsive">
-                                <table id="table-kartu-stok" class="table">
+                                <table id="table-stok-keluar" class="table">
                                     <thead class="border-top">
                                         <tr>
                                             <th>#</th>
-                                            <th>Nama Produk</th>
-                                            <th>Kategori</th>
-                                            <th>Stok Awal</th>
-                                            <th>Stok Masuk</th>
-                                            <th>Stok Keluar</th>
-                                            <th>Penjualan</th>
-                                            <th>Transfer Stok</th>
-                                            <th>Penyesuaian</th>
-                                            <th>Stok Akhir</th>
-                                            <th>Satuan</th>
+                                            <th>ID Transaksi</th>
+                                            <th>Tanggal</th>
+                                            <th>Waktu Submit</th>
+                                            <th>PIC</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -178,6 +173,55 @@
         <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
+
+    <!-- Tambah kategori Modal -->
+    <div class="modal fade" id="modalkeluardetail" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title" id="exampleModalLabel4">Stok Keluar : </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-3" id="info_kode">
+                            TK-1000000000
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 mb-3">
+                            <h5 for="nameExLarge" class="form-label">Outlet</h5>
+                            <h5 for="nameExLarge" class="form-label">Tanggal</h5>
+                            <h5 for="nameExLarge" class="form-label">PIC</h5>
+                            <h5 for="nameExLarge" class="form-label">Catatan</h5>
+                        </div>
+                        <div class="col-8 mb-3" id="info_outlet">
+                            <h5 for="nameExLarge" class="form-label">: -</h5>
+                            <h5 for="nameExLarge" class="form-label">: -</h5>
+                            <h5 for="nameExLarge" class="form-label">: -</h5>
+                            <h5 for="nameExLarge" class="form-label">: -</h5>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <table id="table-keluar-detail" class="table">
+                            <thead class="border-top">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Produk</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Nilai Stok</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ Tambah kategori Modal -->
+
+
 
 
     <!-- Core JS -->
@@ -218,6 +262,64 @@
 <script>
     <?php $target = 0; ?>
 
+    function terapkanfilter() {
+        $("#table-stok-keluar").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            'serverSide': true,
+            'processing': true,
+            'searching': true,
+            "bDestroy": true,
+            "order": [
+                [0, "desc"]
+            ],
+            'ajax': {
+                'dataType': 'json',
+                'url': '<?= base_url() ?>inventory/ajax_table_stok_keluar',
+                'type': 'post',
+                'data': {
+                    outlet: $('#outlet').val(),
+                    kategori: $('#kategori').val(),
+                    dari_tanggal: $('#dari_tanggal').val(),
+                    sampai_tanggal: $('#sampai_tanggal').val()
+                }
+            },
+            'columns': [{
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.no",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.kode_trx",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.tanggal_transaksi",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.date_created",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.nama",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'py-1',
+                "data": "data",
+                "render": function(data) {
+                    return `<div class="d-flex align-items-center">
+                                 <button type="button" class="btn btn-info btn-sm waves-effect waves-light text-white" id="btn_detail" onclick="detailmasuk('` + data.kode_trx + `')"><i class="ti ti-info-circle"></i> Detail</button>
+                            </div>`
+                }
+            }],
+            "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+    }
+
     $('#btn_download_excel').on('click', function() {
 
         if ($('#outlet').val() == '' || $('#kategori').val() == '' || $('#dari_tanggal').val() == '' || $('#sampai_tanggal').val() == '') {
@@ -238,11 +340,36 @@
         var dari_tanggal = $("#dari_tanggal").val();
         var sampai_tanggal = $("#sampai_tanggal").val();
 
-        $("#btn_download_excel").attr("href", "<?= base_url('inventory/generatedata') ?>?outlet=" + outlet + "&kategori=" + kategori + "&dari_tanggal=" + dari_tanggal + "&sampai_tanggal=" + sampai_tanggal)
+        $("#btn_download_excel").attr("href", "<?= base_url('inventory/generatedatakeluar') ?>?outlet=" + outlet + "&kategori=" + kategori + "&dari_tanggal=" + dari_tanggal + "&sampai_tanggal=" + sampai_tanggal)
     });
 
-    function terapkanfilter() {
-        $("#table-kartu-stok").DataTable({
+    function detailmasuk(kode) {
+        $('#modalkeluardetail').modal('show')
+        //ambil data transaksi
+        $.ajax({
+            url: '<?= base_url() ?>inventory/getdata',
+            data: {
+                kode_trx: kode,
+                table: "tbl_stok_keluar"
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                console.log(result)
+                var a = `    <h5 for="nameExLarge" class="form-label">: ` + result.nama_outlet + `</h5>
+                                 <h5 for="nameExLarge" class="form-label">: ` + result.tanggal_transaksi + `</h5>
+                                 <h5 for="nameExLarge" class="form-label">: ` + result.nama + `</h5>
+                                 <h5 for="nameExLarge" class="form-label">: ` + result.catatan + `</h5>`
+
+                var b = result.kode_trx
+
+                $('#info_outlet').html(a)
+                $('#info_kode').html(b)
+            }
+        })
+
+        //datatable
+        $("#table-keluar-detail").DataTable({
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,
@@ -255,13 +382,10 @@
             ],
             'ajax': {
                 'dataType': 'json',
-                'url': '<?= base_url() ?>inventory/ajax_table_kartu_stok',
+                'url': '<?= base_url() ?>inventory/ajax_table_keluar_detail',
                 'type': 'post',
                 'data': {
-                    outlet: $('#outlet').val(),
-                    kategori: $('#kategori').val(),
-                    dari_tanggal: $('#dari_tanggal').val(),
-                    sampai_tanggal: $('#sampai_tanggal').val()
+                    kode: kode
                 }
             },
             'columns': [{
@@ -271,46 +395,19 @@
             }, {
                 "target": [<?= $target ?>],
                 "className": 'text-left py-1',
-                "data": "data",
-                "render": function(data) {
-                    return `<div>` + data.nama_produk + `</div><small>` + data.sku + `</small>`
-                }
+                "data": "data.nama_produk",
             }, {
                 "target": [<?= $target ?>],
                 "className": 'text-center py-1',
-                "data": "data.nama_kategori",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.stok_awal",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.stok_masuk",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.stok_keluar",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.penjualan",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.transfer",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.penyesuaian",
-            }, {
-                "target": [<?= $target ?>],
-                "className": 'text-center py-1',
-                "data": "data.stok_akhir",
+                "data": "data.jumlah",
             }, {
                 "target": [<?= $target ?>],
                 "className": 'text-center py-1',
                 "data": "data.satuan",
+            }, {
+                "target": [<?= $target ?>],
+                "className": 'text-center py-1',
+                "data": "data.nilai_stok",
             }],
             "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
