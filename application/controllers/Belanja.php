@@ -468,4 +468,206 @@ class Belanja extends CI_Controller
         unlink($file_name);
         exit;
     }
+
+    public function updatestatus()
+    {
+        $where = array(
+            'kode_trx' => $this->input->post('kode_trx')
+        );
+        $table = $this->input->post('table');
+
+        $data = array(
+            'status_po' => 'Dibatalkan'
+        );
+
+        $update = $this->crud->update($table, $data, $where);
+
+        if ($update > 0) {
+
+            $response = ['status' => 'success', 'message' => 'Berhasil Ubah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Ubah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function daftar_belanja()
+    {
+        $a = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+        $data['id_mst_bisnis'] = $a['id'];
+        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $a['id']])->result_array();
+        // $data['supplier'] = $this->crud->get_where('mst_supplier', ['id_mst_bisnis' => $a['id']])->result_array();
+
+        $this->load->view('belanja/daftar_belanja', $data);
+    }
+
+    public function ajax_table_belanja()
+    {
+        $where = array(
+            'id_mst_bisnis' => $this->input->post('id_mst_bisnis')
+        );
+        $table = 'tbl_daftar_belanja'; //nama tabel dari database
+        $column_order = array('id', 'id_mst_bisnis', 'id_mst_outlet', 'nama_outlet', 'nama_produk', 'brand', 'supplier', 'jumlah', 'satuan', 'harga_satuan', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'id_mst_bisnis', 'id_mst_outlet', 'nama_outlet', 'nama_produk', 'brand', 'supplier', 'jumlah', 'satuan', 'harga_satuan', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, id_mst_bisnis, id_mst_outlet, nama_outlet, nama_produk, brand, supplier, jumlah, satuan, harga_satuan, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['id_mst_bisnis'] = $key->id_mst_bisnis;
+            $row['data']['id_mst_outlet'] = $key->id_mst_outlet;
+            $row['data']['nama_outlet'] = $key->nama_outlet;
+            $row['data']['nama_produk'] = $key->nama_produk;
+            $row['data']['brand'] = $key->brand;
+            $row['data']['supplier'] = $key->supplier;
+            $row['data']['jumlah'] = $key->jumlah;
+            $row['data']['satuan'] = $key->satuan;
+            $row['data']['harga_satuan'] = $key->harga_satuan;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function insert_data_belanja()
+    {
+        $table = $this->input->post("table");
+
+        $data = $this->input->post();
+        unset($data['table']);
+
+        //cek dulu apakah ada double
+        $a = explode('-', $data['outlet']);
+        $where = array(
+            'nama_produk' => $data['nama_produk'],
+            'id_mst_outlet' => $a['0']
+        );
+        $r = $this->crud->get_where('tbl_daftar_belanja', $where)->row_array();
+
+        if ($r) {
+            $response = ['status' => 'double', 'message' => 'Gagal Tambah Data!'];
+            echo json_encode($response);
+            die;
+        } else {
+            unset($data['outlet']);
+            $data['nama_outlet'] = $a[1];
+            $data['id_mst_outlet'] = $a[0];
+            $insert_data = $this->crud->insert($table, $data);
+        }
+
+
+        if ($insert_data > 0) {
+
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+        echo json_encode($response);
+    }
+
+    public function daftar_pengeluaran()
+    {
+        $a = $this->crud->get_where('mst_bisnis', ['id_mst_user' => $this->session->userdata('id')])->row_array();
+        $data['id_mst_bisnis'] = $a['id'];
+        $data['outlet'] = $this->crud->get_where('mst_outlet', ['id_mst_bisnis' => $a['id']])->result_array();
+        // $data['supplier'] = $this->crud->get_where('mst_supplier', ['id_mst_bisnis' => $a['id']])->result_array();
+
+        $this->load->view('belanja/daftar_pengeluaran', $data);
+    }
+
+    public function ajax_table_pengeluaran()
+    {
+        $where = array(
+            'id_mst_bisnis' => $this->input->post('id_mst_bisnis')
+        );
+        $table = 'tbl_daftar_pengeluaran'; //nama tabel dari database
+        $column_order = array('id', 'id_mst_bisnis', 'id_mst_outlet', 'nama_outlet', 'tanggal', 'nama_pengeluaran', 'jenis_pengeluaran', 'supplier', 'jumlah', 'satuan', 'total_harga', 'date_created'); //field yang ada di table user
+        $column_search = array('id', 'id_mst_bisnis', 'id_mst_outlet', 'nama_outlet', 'tanggal', 'nama_pengeluaran', 'jenis_pengeluaran', 'supplier', 'jumlah', 'satuan', 'total_harga', 'date_created'); //field yang diizin untuk pencarian 
+        $select = 'id, id_mst_bisnis, id_mst_outlet, nama_outlet, tanggal, nama_pengeluaran, jenis_pengeluaran, supplier, jumlah, satuan, total_harga, date_created';
+        $order = array('id' => 'asc'); // default order 
+        $list = $this->crud->get_datatables($table, $select, $column_order, $column_search, $order, $where);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $key) {
+            $no++;
+            $row = array();
+            $row['data']['no'] = $no;
+            $row['data']['id'] = $key->id;
+            $row['data']['id_mst_bisnis'] = $key->id_mst_bisnis;
+            $row['data']['id_mst_outlet'] = $key->id_mst_outlet;
+            $row['data']['nama_outlet'] = $key->nama_outlet;
+            $row['data']['tanggal'] = $key->tanggal;
+            $row['data']['nama_pengeluaran'] = $key->nama_pengeluaran;
+            $row['data']['jenis_pengeluaran'] = $key->jenis_pengeluaran;
+            $row['data']['supplier'] = $key->supplier;
+            $row['data']['jumlah'] = $key->jumlah;
+            $row['data']['satuan'] = $key->satuan;
+            $row['data']['total_harga'] = $key->total_harga;
+            $row['data']['date_created'] = date('d-M-Y', strtotime($key->date_created));
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->crud->count_all($table),
+            "recordsFiltered" => $this->crud->count_filtered($table, $select, $column_order, $column_search, $order, $where),
+            "data" => $data,
+            "query" => $this->db->last_query()
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function insert_data_pengeluaran()
+    {
+        $table = $this->input->post("table");
+
+        $data = $this->input->post();
+        unset($data['table']);
+
+        //cek dulu apakah ada double
+        $a = explode('-', $data['outlet']);
+        $where = array(
+            'nama_pengeluaran' => $data['nama_pengeluaran'],
+            'id_mst_outlet' => $a['0'],
+            'tanggal' => $data['tanggal']
+        );
+        $r = $this->crud->get_where('tbl_daftar_pengeluaran', $where)->row_array();
+
+        if ($r) {
+            $response = ['status' => 'double', 'message' => 'Gagal Tambah Data!'];
+            echo json_encode($response);
+            die;
+        } else {
+            unset($data['outlet']);
+            $data['nama_outlet'] = $a[1];
+            $data['id_mst_outlet'] = $a[0];
+            $insert_data = $this->crud->insert($table, $data);
+        }
+
+
+        if ($insert_data > 0) {
+
+            $response = ['status' => 'success', 'message' => 'Berhasil Tambah Data!'];
+        } else
+            $response = ['status' => 'error', 'message' => 'Gagal Tambah Data!'];
+
+        echo json_encode($response);
+    }
 }

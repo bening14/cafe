@@ -200,6 +200,9 @@
                         <div class="col mb-3" id="info_kode">
                             PO/SCM/1000/1
                         </div>
+                        <div class="col mb-3" style="text-align: right;" id="info_status">
+
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-1 mb-3">
@@ -338,14 +341,26 @@
                 "className": 'py-1',
                 "data": "data",
                 "render": function(data) {
-                    return `<div class="d-flex align-items-center">
-                                 <button type="button" class="btn btn-info btn-sm waves-effect waves-light text-white" id="btn_detail" onclick="detailpo('` + data.kode_trx + `')"><i class="ti ti-info-circle"></i> Detail</button>
-                            </div>`
+                    if (data.status_po == 'Dibatalkan') {
+                        return `<div class="d-flex align-items-center">
+                                     <button type="button" class="btn btn-info btn-sm waves-effect waves-light text-white" id="btn_detail" onclick="detailpo('` + data.kode_trx + `')"><i class="ti ti-info-circle"></i> Detail</button>
+                                </div>`
+                    } else {
+                        return `<div class="d-flex align-items-center">
+                                     <button type="button" class="btn btn-info btn-sm waves-effect waves-light text-white" id="btn_detail" onclick="detailpo('` + data.kode_trx + `')"><i class="ti ti-info-circle"></i> Detail</button>&nbsp;
+                                     <button type="button" class="btn btn-danger btn-sm waves-effect waves-light text-white" id="btn_detail" onclick="batalkan('` + data.kode_trx + `')"><i class="ti ti-x"></i> Batalkan</button>&nbsp;
+                                     <a href="#" type="button" class="btn btn-secondary btn-sm waves-effect waves-light text-white" id="btn_detail"><i class="ti ti-printer"></i> Cetak</a>
+                                </div>`
+                    }
                 }
             }],
             "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         });
+    }
+
+    function reload_table() {
+        $('#table-po').DataTable().ajax.reload(null, false);
     }
 
     $('#btn_download_excel').on('click', function() {
@@ -382,10 +397,6 @@
 
         }
 
-
-
-
-
         $("#btn_download_excel").attr("href", "<?= base_url('belanja/generatedatapo') ?>?outlet=" + outlet + "&supplier=" + supplier + "&dari_tanggal=" + dari_tanggal + "&sampai_tanggal=" + sampai_tanggal + "&status_po=" + status_po + "&nomor_po=" + nomor_po + "&id_mst_bisnis=" + id_mst_bisnis)
     });
 
@@ -409,8 +420,15 @@
 
                 var b = result.nomor_po
 
+                if (result.status_po == 'Dipesan') {
+                    var c = `<span class="badge rounded-pill bg-label-success">Dipesan</span>`
+                } else {
+                    var c = `<span class="badge rounded-pill bg-label-danger">Dibatalkan</span>`
+                }
+
                 $('#info_outlet').html(a)
                 $('#info_kode').html(b)
+                $('#info_status').html(c)
             }
         })
 
@@ -462,5 +480,24 @@
             "dom": '<"row" <"col-md-6" l><"col-md-6" f>>rt<"row" <"col-md-6" i><"col-md-6" p>>',
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         });
+    }
+
+    function batalkan(kode) {
+        $.ajax({
+            url: '<?= base_url() ?>belanja/updatestatus',
+            data: {
+                kode_trx: kode,
+                table: "tbl_purchase_order"
+            },
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                if (result.status == "success") {
+                    reload_table()
+                } else {
+                    reload_table()
+                }
+            }
+        })
     }
 </script>
