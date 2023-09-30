@@ -126,22 +126,22 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('belanja') ?>" class="menu-link">
                         <div data-i18n="Supplier">Supplier</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('belanja/purchase_order') ?>" class="menu-link">
                         <div data-i18n="Purchase Order">Purchase Order</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('belanja/daftar_belanja') ?>" class="menu-link">
                         <div data-i18n="Daftar Belanja">Daftar Belanja</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#" class="menu-link" target="_blank">
+                    <a href="<?= base_url('belanja/daftar_pengeluaran') ?>" class="menu-link">
                         <div data-i18n="Daftar Pengeluaran">Daftar Pengeluaran</div>
                     </a>
                 </li>
