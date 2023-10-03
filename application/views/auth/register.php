@@ -54,14 +54,22 @@
     <div class="authentication-wrapper authentication-cover authentication-bg">
         <div class="authentication-inner row">
             <!-- /Left Text -->
-            <div class="d-none d-lg-flex col-lg-7 p-0">
+            <!-- <div class="d-none d-lg-flex col-lg-7 p-0">
                 <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
                     <img src="<?= base_url('assets/template-admin/') ?>assets/img/illustrations/auth-register-illustration-light.png" alt="auth-register-cover" class="img-fluid my-5 auth-illustration" data-app-light-img="illustrations/auth-register-illustration-light.png" data-app-dark-img="illustrations/auth-register-illustration-dark.png" />
 
                     <img src="<?= base_url('assets/template-admin/') ?>assets/img/illustrations/bg-shape-image-light.png" alt="auth-register-cover" class="platform-bg" data-app-light-img="illustrations/bg-shape-image-light.png" data-app-dark-img="illustrations/bg-shape-image-dark.png" />
                 </div>
-            </div>
+            </div> -->
+
             <!-- /Left Text -->
+            <!-- Cover Image-->
+            <div class="d-none d-lg-flex col-lg-7 align-items-center p-0">
+                <div class="auth-cover-bg w-100 h-auto d-lg-flex align-items-center justify-content-start">
+                    <img class="img-fluid auth-cover-image" src="<?= base_url('assets/template-admin/') ?>assets/img/illustrations/Illustrations-2.png" alt="login" />
+                </div>
+            </div>
+            <!-- /Cover Image-->
 
             <!-- Register -->
             <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4">

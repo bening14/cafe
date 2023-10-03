@@ -25,9 +25,9 @@
     <ul class="menu-inner py-1 mb-3">
         <!-- Dashboards -->
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('kasir') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div data-i18n="Dashboards">Dashboard</div>
+                <div data-i18n="Manajemen Meja">Manajemen Meja</div>
             </a>
         </li>
 
@@ -36,9 +36,9 @@
             <span class="menu-header-text">Kasir</span>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="<?= base_url('kasir/payment') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home-dollar"></i>
-                <div data-i18n="Transaksi Baru">Transaksi Baru</div>
+                <div data-i18n="Pembayaran">Pembayaran</div>
             </a>
         </li>
         <li class="menu-item">
@@ -55,13 +55,19 @@
         </li>
         <li class="menu-item">
             <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-wallet"></i>
+                <div data-i18n="Register Pelanggan">Register Pelanggan</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-timeline"></i>
                 <div data-i18n="Laporan">Laporan</div>
             </a>
         </li>
 
         <!-- Karyawan -->
-        <li class="menu-header small text-uppercase">
+        <!-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Karyawan</span>
         </li>
         <li class="menu-item">
@@ -69,7 +75,7 @@
                 <i class="menu-icon tf-icons ti ti-map-2"></i>
                 <div data-i18n="Absensi">Absensi</div>
             </a>
-        </li>
+        </li> -->
 
 
     </ul>

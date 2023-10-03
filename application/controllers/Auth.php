@@ -29,11 +29,7 @@ class Auth extends CI_Controller
             } else if ($this->session->userdata('level') == 'manajer') {
                 redirect('customer/manajer');
             } else if ($this->session->userdata('level') == 'kasir') {
-                redirect('customer/kasir');
-            } else if ($this->session->userdata('level') == 'waitress') {
-                redirect('customer/waitress');
-            } else if ($this->session->userdata('level') == 'kitchen') {
-                redirect('customer/kitchen');
+                redirect('kasir');
             } else {
                 redirect('error404');
             }
@@ -86,11 +82,7 @@ class Auth extends CI_Controller
                     } else if ($user['level'] == 'manajer') {
                         redirect('customer/manajer');
                     } else if ($user['level'] == 'kasir') {
-                        redirect('customer/kasir');
-                    } else if ($user['level'] == 'waitress') {
-                        redirect('customer/waitress');
-                    } else if ($user['level'] == 'kitchen') {
-                        redirect('customer/kitchen');
+                        redirect('kasir');
                     }
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
